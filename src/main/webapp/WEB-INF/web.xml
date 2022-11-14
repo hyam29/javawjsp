@@ -9,4 +9,35 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+
+	<!-- Controller 설정 -->
+	<!-- 
+	<servlet>
+		<servlet-name>test2</servlet-name>	
+		<servlet-class>j1111.Test2</servlet-class>	
+	</servlet>
+		<servlet-mapping>
+			<servlet-name>test2</servlet-name>	
+			<url-pattern>/t2</url-pattern>
+		</servlet-mapping>
+	-->
+	<!-- servlet 개수에 따라 모두 작성해줘야 함 (옛날에는 100개 servlet 만들었다면, 100개 작성했음) -->
+	<!-- <servlet>
+		<servlet-name>test12</servlet-name> servlet 별명 (내가 정한 것)
+		<servlet-class>j1111.Test12</servlet-class> 실제 주소 (class 명)
+	</servlet>
+	<servlet-mapping> servlet 맵핑 : url 에 적어준 경로를 해당 파일명으로 가주겠다.
+		<servlet-name>test12</servlet-name> 위의 servlet 명 과 동일하게 작성
+		<url-pattern>/t12</url-pattern> url 경로 작성(jsp에서 form action)
+	</servlet-mapping> -->
+	
+	<servlet>
+		<servlet-name>test12</servlet-name> <!-- servlet 별명 (내가 정한 것) -->
+		<servlet-class>j1111.Test12</servlet-class> <!-- 실제 주소 (class 명) -->
+	</servlet>
+	<servlet-mapping> <!-- servlet 맵핑 : url 에 적어준 경로를 해당 파일명으로 가주겠다. -->
+		<servlet-name>test12</servlet-name> <!-- 위의 servlet 명 과 동일하게 작성 -->
+		<url-pattern>/test12ok</url-pattern> <!-- url 실제 경로 작성(jsp에서 form action) -->
+	</servlet-mapping>
+	
 </web-app>
