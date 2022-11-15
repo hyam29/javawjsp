@@ -33,6 +33,7 @@
 		<p>
 			<input type="submit" value="전송" class="btn btn-success" />
 		</p>
+		<input type="hidden" name="hostIp" value="<%=request.getRemoteAddr() %>" /> <!-- getRemoteAddr() : 접속사의 IP 불러올 때 명령어 -->
 	</form>
 </div>
 <p><br/></p>

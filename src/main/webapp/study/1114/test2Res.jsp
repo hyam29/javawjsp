@@ -5,6 +5,7 @@
 
 	String mid = request.getParameter("mid");
 	String name = request.getParameter("name");
+	String hostIp = request.getParameter("hostIp");
 %>
 <!DOCTYPE html>
 <html>
@@ -32,6 +33,8 @@
 		요청 파라메터 길이 : <%=request.getContentLength() %><br/>
 		현재 ContextPath : <%=request.getContextPath() %><br/>
 		현재 사용중인 프로토콜 : <%=request.getProtocol() %><br/>
+		현재 접속자의 IP : <%=hostIp %><br/>
+		<!-- IpV4 (32bit) 고갈을 DHCP(유동IP), 사설IP 등으로 로 해결 -> V6 : 16진수(128bit) -->
 	<hr/>
 	<p>
 		<!-- <a href="logout.jsp">로그아웃</a> --> <!-- jsp에 생성 -->

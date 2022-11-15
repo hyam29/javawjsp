@@ -39,6 +39,8 @@ public class Test2 extends HttpServlet {
 //		String pwd = request.getParameter("pwd");
 		String pwd = request.getParameter("pwd") == null ? "" : request.getParameter("pwd");
 		String name = request.getParameter("name") == null ? "" : request.getParameter("name");
+		String hostIp = request.getParameter("hostIp"); // 얘는 null 값 없기때문에 유효성검사 X
+		
 		
 		mid = mid.trim();
 		name = name.trim();
@@ -48,7 +50,10 @@ public class Test2 extends HttpServlet {
 		if(mid.equals("admin") && pwd.equals("1234")) {
 			out.println("<script>");
 			out.println("alert('관리자인증 성공!')");
-			out.println("location.href='"+request.getContextPath()+"/study/1114/test2Res.jsp?mid="+mid+"&name="+name+"';"); 
+			
+			// 모델에 담았다 라는 의미 => ? 뒤 변수선언해서 작성하는 것
+			// 진정한 모델은 VO 객체에 담는 것 (아직 안배워서 get방식으로 작성한 것)
+			out.println("location.href='"+request.getContextPath()+"/study/1114/test2Res.jsp?mid="+mid+"&name="+name+"&hostIp="+hostIp+"';"); 
 			// 경로 제일 뒤 ? 뒤에는 변수명 작성하는 곳 / 연결 연산자 : & / JS 끝에는 항상 ; 붙여주기 (생략가능하지만, 생략하지말기)
 			out.println("</script>");
 		}
