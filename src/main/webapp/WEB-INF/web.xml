@@ -10,6 +10,13 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
 
+	<!-- 
+		localhost:9090/javawjsp/ 주소를 웹에서 입력시,
+		webapp 안에서 1st. index.html ~ default.jsp 까지 순서대로 인식하게 됨.
+		따라서, webapp 안에 index.jsp 를 만들어 둠 
+		=> 1st. index.html -> 2ed. index.htm 파일 없으니까 3td 순서에 걸려서 출력
+	-->
+	
 	<!-- Controller 설정 -->
 	<!-- 
 	<servlet>
@@ -39,5 +46,66 @@
 		<servlet-name>test12</servlet-name> <!-- 위의 servlet 명 과 동일하게 작성 -->
 		<url-pattern>/test12ok</url-pattern> <!-- url 실제 경로 작성(jsp에서 form action) -->
 	</servlet-mapping>
+	
+	
+	<!-- 2-1. 특정 서블릿에 초기값을 할당하기 (2-2. 는 GreenInit.java (servlet)에서 작성 -->
+	<!-- <servlet>
+		<servlet-name>green</servlet-name>
+		<servlet-class>j1117.Green</servlet-class> 실제주소에서 .java는 생략가능
+		<init-param>
+			<param-name>mid</param-name>
+			<param-value>admin</param-value>
+		</init-param>
+		<init-param>
+			<param-name>pwd</param-name>
+			<param-value>1234</param-value>
+		</init-param>
+		<init-param>
+			<param-name>className</param-name>
+			<param-value>인사과</param-value> value 값은 한글처리가 잘 되어있다면, 한글로 작성해도 무관
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>green</servlet-name>
+		<url-pattern>/Green</url-pattern> /Jinit 에 들어왔을 때, servlet 변수명 green 찾아감! => 45행(green)으로 가서 초기값 할당
+	</servlet-mapping> -->
+	
+	 
+	 
+	<!-- 1. 공통변수에 초기값 할당하기 -->
+	<context-param>
+		<param-name>logoName</param-name>
+		<param-value>Java Green Company</param-value>
+	</context-param>
+	<context-param>
+		<param-name>homeAddress</param-name>
+		<param-value>http://192.168.50.190:9090/javawjsp/</param-value>
+	</context-param>
+	
+	<!-- error페이지 설정하기(배포할 때 만드는 것. 에러코드 안나오면 우리는 에러 찾기 힘드니까!) -->
+	<!-- <error-page>
+		<error-code>400</error-code>
+		<location>/study/1117/error/error400.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/study/1117/error/error400.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/study/1117/error/error500.jsp</location>
+	</error-page> -->
+	
+	<!-- Filter 맵핑처리 -->
+	<!-- <filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>filter.EncodingFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping> -->
+	 <!-- filter-name : 별명은 보통 class 명을 가져와서 첫글자를 소문자로 바꿔줌 -->
+	 <!-- url-pattern : /* : 모든 경로에서 오는 것들을 encodingFilter를 통과시키겠다. -->
 	
 </web-app>

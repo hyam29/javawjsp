@@ -1,4 +1,4 @@
-<%@page import="j1116h.InputVO"%>
+<%@page import="j1116h_me.InputVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!-- list.jsp -->
 <% 

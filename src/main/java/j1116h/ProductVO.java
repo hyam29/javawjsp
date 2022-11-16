@@ -1,4 +1,4 @@
-package j1116h_T;
+package j1116h;
 
 public class ProductVO {
 	private String product;

@@ -61,7 +61,7 @@
 <div class="container">
 	<h2>상품 등록 *'-'*</h2>
 	<hr/>
-		<form name="myform" method="post" action="<%=request.getContextPath()%>/j1116h/InputOk">
+		<form name="myform" method="post" action="<%=request.getContextPath()%>/j1116h_me/InputOk">
     	<table class="table">
         <tr>
 	        <td>

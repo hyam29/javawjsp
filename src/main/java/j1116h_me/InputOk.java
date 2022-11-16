@@ -1,4 +1,4 @@
-package j1116h;
+package j1116h_me;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/j1116h/InputOk")
+@WebServlet("/j1116h_me/InputOk")
 public class InputOk extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -86,6 +86,7 @@ public class InputOk extends HttpServlet{
         pTot += tot;
     }
     
+    // VO에 값 담기
     InputVO vo = new InputVO(name,strCode,strProduct,strSu,strPrice,pTot);
 //    System.out.println("vo" + vo);
     

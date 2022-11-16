@@ -1,4 +1,4 @@
-package j1116h;
+package j1116h_me;
 
 public class InputVO {
 	private String name;
