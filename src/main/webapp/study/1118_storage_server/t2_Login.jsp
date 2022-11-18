@@ -35,7 +35,7 @@
 					<input type="text" name="mid" id="mid" value="<%=mid%>" autofocus placeholder="아이디 입력" class="form-control"/>
 				</td>
 				<td rowspan="2" style="text-align:center;">
-					<input type="checkbox" name="rememMid" id="rememMid" value="<%=mid%>" style="font-size:1.5em;" checked />아이디 기억하기
+					<input type="checkbox" name="rememMid" id="rememMid" style="font-size:1.5em;" checked />아이디 기억하기
 				</td>
 			</tr>
 			<tr>
