@@ -103,12 +103,16 @@
 			<c:set var="inputText" value="${fn:indexOf(af,inputT)}" />
 			<%-- ${inputText}<br/>
 			${bf}<br/> --%>
+			
 			<%-- <c:if test="${inputT ne null}"> --%>
 			<c:if test="${!empty inputT}"> <!-- 웬만하면 empty 사용하기 -->
 				<c:if test="${inputText eq -1}"> 입력한 문자의 첫번째 위치 : ${fn:length(bf)} (두번째 값 없음)</c:if>
 				<c:if test="${inputText ne -1}"> 입력한 문자의 두번째 위치 : ${inputText+fn:length(bf)+1}</c:if>
 			</c:if>
 		</form>	
+		
+
+
 		
 		<br/><br/><br/>				
 		7. 문자열 분리(split(변수, 분리할 문자)) = > 결과를 담아야하므로 무조건 변수 필요! c:set 필수! <br/>
