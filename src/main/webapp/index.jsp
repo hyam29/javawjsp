@@ -14,13 +14,8 @@
   </style>
 </head>
 <body>
-
-<div class="jumbotron text-center" style="margin-bottom:0">
-  <h1>혜영 집에 오신 것을 환영합니다.</h1>
-  <p>(본 페이지는 반응형으로 제작된 JSP 프로젝트 입니다.)</p> 
-</div>
-
-<jsp:include page="include/nav.jsp" />
+<jsp:include page="include/header.jsp" />
+<p><br/></p>
 
 <div class="container" style="margin-top:30px">
   <div class="row">
@@ -62,6 +57,7 @@
     </div>
   </div>
 </div>
+<p><br/></p>
 <jsp:include page="include/footer.jsp" />
 </body>
 </html>
