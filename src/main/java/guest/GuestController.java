@@ -31,7 +31,7 @@ public class GuestController extends HttpServlet {
 			command = new GuInputOkCommand();
 			command.execute(request, response);
 			// viewPage += "/guList.jsp"; // jsp로 바로 보내면 수정된 DB 값을 가지고 가지 않음. guList 컨트롤러로 보내야 함.
-			//	viewPage = request.getContextPath()+"/guList.gu"; // 대화형 뷰를 만들기 위해 아래와 같이 작성해야 함
+			// viewPage = request.getContextPath()+"/guList.gu"; // 대화형 뷰를 만들기 위해 아래와 같이 작성해야 함
 			viewPage = "/include/message.jsp"; 
 			// message가 중요하다면 WEB-INF 폴더 안에 생성해야 함! 메세지 창 띄우니까 viewPage 부등호 += XXX = OOO
 			// 메세지를 띄울거면 command 생성하는 게 좋음

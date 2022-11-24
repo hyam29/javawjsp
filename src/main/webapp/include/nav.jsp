@@ -22,7 +22,7 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">STUDY</a>
         <div class="dropdown-menu">
-		      <a class="dropdown-item" href="#">Link 1</a>
+		      <a class="dropdown-item" href="${ctp}/pass.st">비밀번호 암호화</a>
 		      <a class="dropdown-item" href="#">Link 2</a>
 		      <a class="dropdown-item-text" href="#">Text Link</a>
 	    	</div>

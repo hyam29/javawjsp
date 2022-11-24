@@ -90,14 +90,14 @@
 			<tr>
 				<th>전자우편(E-Mail)</th>
 				<td colspan="3">
-					<c:if test="${fn:length(vo.email) <= 4}"> - </c:if>
+					<c:if test="${fn:length(vo.email) <= 4}"> - 입력사항 없음 - </c:if>
 					<c:if test="${fn:length(vo.email) > 4}"><a href="${vo.email}" target="_blank">${vo.email}</a></c:if>
 				</td>
 			</tr>
 			<tr>
 				<th>홈페이지(블로그)</th>
 				<td colspan="3">
-					<c:if test="${fn:length(vo.homePage) <= 8}"> - </c:if>
+					<c:if test="${fn:length(vo.homePage) <= 8}"> - 입력사항 없음 - </c:if>
 					<c:if test="${fn:length(vo.homePage) > 8}"><a href="${vo.homePage}" target="_blank">${vo.homePage}</a></c:if>
 				</td>
 			</tr>
@@ -114,31 +114,18 @@
 	
 	<!-- 첫 페이지 / 이전블록 / [1] [2] [3] 페이지 / 다음블록 / 마지막 페이지 -->
 	<div class="text-center">
-		<ul class="pagination justify-content-center">
-			<c:if test="${pag > 1}">
-				 <li class="page-item"><a class="page-link text-secondary" href="${ctp}/guList.gu?pag=1">첫 페이지</a></li>
-			</c:if>
-				<c:if test="${curBlock > 0}">
-					 <li class="page-item"><a class="page-link text-secondary" href="${ctp}/guList.gu?pag=${(curBlock-1)*blockSize + 1}">이전블록</a></li>
+		<c:if test="${pag > 1}">[<a href="${ctp}/guList.gu?pag=1">첫 페이지</a>]</c:if>
+			<c:if test="${curBlock > 0}">[<a href="${ctp}/guList.gu?pag=${(curBlock-1)*blockSize + 1}">이전블록</a>]</c:if>
+			
+			<c:forEach var="i" begin="${(curBlock)*blockSize + 1}" end="${(curBlock)*blockSize + blockSize}" varStatus="st">
+			<!-- begin: 0블록*3+1 = 1페이지 / 1블록*3+1 = 4페이지  -->
+				<c:if test="${i <= totPage}"> <!-- 자료가 없으면 마지막 블록에서는 페이지 표시 안되게끔 if문 추가 -->
+					[<a href="${ctp}/guList.gu?pag=${i}">${i}</a>]
 				</c:if>
-				
-				<c:forEach var="i" begin="${(curBlock)*blockSize + 1}" end="${(curBlock)*blockSize + blockSize}" varStatus="st">
-				<!-- begin: 0블록*3+1 = 1페이지 / 1블록*3+1 = 4페이지  -->
-					<c:if test="${i <= totPage && i == pag}"> <!-- 자료가 없으면 마지막 블록에서는 페이지 표시 안되게끔 if문 추가 -->
-						 <li class="page-item active"><a class="page-link bg-secondary border-secondary" href="${ctp}/guList.gu?pag=${i}">${i}</a></li>
-					</c:if>
-					<c:if test="${i <= totPage && i != pag}">
-						 <li class="page-item"><a class="page-link text-secondary" href="${ctp}/guList.gu?pag=${i}">${i}</a></li>
-					</c:if>
-				</c:forEach>
-				
-				<c:if test="${curBlock < lastBlock}">
-					 <li class="page-item"><a class="page-link text-secondary" href="${ctp}/guList.gu?pag=${(curBlock+1)*blockSize + 1}">다음블록</a></li>
-				</c:if>
-			<c:if test="${pag < totPage}">
-				 <li class="page-item"><a class="page-link text-secondary" href="${ctp}/guList.gu?pag=${totPage}">마지막 페이지</a></li>
-			</c:if>
-		</ul>
+			</c:forEach>
+			
+			<c:if test="${curBlock < lastBlock}">[<a href="${ctp}/guList.gu?pag=${(curBlock+1)*blockSize + 1}">다음블록</a>]</c:if>
+		<c:if test="${pag < totPage}">[<a href="${ctp}/guList.gu?pag=${totPage}">마지막 페이지</a>]</c:if>
 	</div>
 	
 </div>
