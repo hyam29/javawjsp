@@ -40,12 +40,12 @@
 		<h4>입력하신 <font color="blue"><b>${nickName}</b></font>은(는) 사용가능합니다.</h4>
 		<p><input type="button" value="닉네임(별명) 사용하기" onclick="sendCheck()" /></p>
 	</c:if>
-	<c:if test="${nickRes != 1}"> <!-- DB없어도 여기서 거를 수 있는지 -> 여기여기여기여기여기여기여기여기여기 -->
+	<c:if test="${nickRes != 1}">
 		<h4><font color="red"><b>${nickName}</b></font>은(는) 이미 사용중인 닉네임입니다.</h4>
 		<form name="childForm" method="post" action="${ctp}/nickNameCheck.mem">
 			<p>
 				<input type="text" name="nickName" /> <!-- 동일한 mid name을 넣어야 함 -->
-				<input type="button" value="재검색" onclick="nickNameCheck(관리해용)" />
+				<input type="button" value="재검색" onclick="nickNameCheck()" />
 			</p>
 		</form>
 	</c:if>

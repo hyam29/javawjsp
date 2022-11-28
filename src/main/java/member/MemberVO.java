@@ -1,4 +1,4 @@
-package mamber;
+package member;
 
 public class MemberVO {
 	private int idx;

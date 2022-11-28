@@ -1,4 +1,4 @@
-package mamber;
+package member;
 
 import java.io.IOException;
 
@@ -13,10 +13,11 @@ public class NickNameCheckCommand implements MemberInterface {
 		String nickName = request.getParameter("nickName") == null ? "" : request.getParameter("nickName");
 		
 		MemberDAO dao = new MemberDAO(); 
-		MemberVO vo = dao.getLoginCheck(nickName);
+		int nickRes = 1;
+		nickRes = dao.getNickNameCheck(nickName);
 		 
 		// 닉네임 중복체크
-		if(vo == null) {
+		if(nickRes == 1) {
 			request.setAttribute("nickRes", 1);
 		}
 		else {

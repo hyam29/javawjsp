@@ -1,4 +1,4 @@
-package mamber;
+package member;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -87,5 +87,24 @@ public class MemberDAO {
 		} catch (Exception e) {
 			getConn.pstmtClose();
 		}
+	}
+
+	// 닉네임 중복체크 처리
+	public int getNickNameCheck(String nickName) {
+		int nickRes = 1;
+		try {
+			sql = "select * from member where nickName = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, nickName);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				nickRes = 0;
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 오류 : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return nickRes;
 	}
 }

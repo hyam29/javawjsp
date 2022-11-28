@@ -1,4 +1,4 @@
-package mamber;
+package member;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;

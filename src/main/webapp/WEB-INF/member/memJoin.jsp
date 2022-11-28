@@ -14,63 +14,76 @@
   <script>
 	  'use strict';
 	  // 회원가입폼 체크 후 서버 전송(submit) -> 프론트 유효성 검사
+		// form 유효성 검사 -> 과제
 	  function fCheck() {
-			// form 유효성 검사 -> 과제(복붙)
-			 
-      /* let mid = document.getElementById("mid").value;
-      let pwd = document.getElementById("pwd").value;
-      let name = document.getElementById("name").value;
-      let phone = document.getElementById("phone").value;
-      let email = document.getElementById("email").value;
-        
-      let regMid = /[a-zA-Z0-9_]/g; 
-      let regName = /[A-Za-z가-힣]{2,20}/g;
-      let regTel = /(\d{2,3})-(\d{3,4})-(\d{4})/g;
-      let regEmail = /[a-zA-Z0-9_.]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,3}/g;
-      
-      if(mid.trim() == "") {
-        alert("아이디를 입력해주세요.")
-        document.getElementById("mid").focus();
-        return;
-      }
-      if(!regMid.test(mid)) {
-        alert("아이디형식이 맞지 않습니다. 영문 대/소문자와 숫자 _만 가능합니다!")
-        document.getElementById("mid").focus();
-        return;
-      }
-      if(pwd.trim() == "") {
-        alert("비밀번호를 입력해주세요.")
-        document.getElementById("pwd").focus();
-        return;
-      }
-      if(name.trim() == "") {
-        alert("성명을 입력해주세요.")
-        document.getElementById("name").focus();
-        return;
-      }
-      if(!regName.test(name)) {
-        alert("성명은 길이 2~20자의 한글, 영문만 입력가능합니다!")
-        document.getElementById("name").focus();
-        return;
-      }
-      if(phone.trim() == "") {
-        alert("전화번호를 입력해주세요!")
-        return;
-      }
-      if(!regTel.test(phone)) {
-        alert("전화번호 형식은 '02(0)-123(4)-5678' 입니다!")
-        document.getElementById("phone").focus();
-        return;
-      }
-      if(email.trim() == "") {
-        alert("이메일을 입력해주세요!")
-        return;
-      }
-      if(!regEmail.test(email)) {
-        alert("이메일 형식이 올바르지 않습니다!")
-        document.getElementById("email").focus();
-        return;
-      } */
+			/* let joinMyForm = document.myform; */
+			
+			let mid = myform.mid.value;
+			let pwd = myform.pwd.value;
+			let nickName = myform.nickName.value;
+			let name = myform.name.value;
+			/* let tel2 = document.getElementById("tel2").value;
+			let tel3 = document.getElementById("tel3").value;
+			let email = document.getElementById("email").value; */
+			  
+			let regMid = /[a-zA-Z0-9_]/g; 
+			let regName = /[A-Za-z가-힣]{2,20}/g;
+			let regTel = /(\d{2,3})-(\d{3,4})-(\d{4})/g;
+			let regEmail = /[a-zA-Z0-9_.]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,3}/g;
+			
+			if(mid.trim() == "") {
+			  alert("아이디를 입력해주세요.")
+			  document.getElementById("mid").focus();
+			  return;
+			}
+			else if(!regMid.test(mid)) {
+			  alert("아이디형식은 영문 대/소문자와 숫자 _만 가능합니다!")
+			  document.getElementById("mid").focus();
+			  return;
+			}
+			else if(myform.midDuplication.value != "midCheck") {
+				alert("아이디 중복체크를 해주세요!")
+			  document.getElementById("mid").focus();
+				return;				
+			}
+			if(pwd.trim() == "") {
+			  alert("비밀번호를 입력해주세요.")
+			  document.getElementById("pwd").focus();
+			  return;
+			}
+			if(nickName.trim() == "") {
+			  alert("닉네임(별명)을 입력해주세요.")
+			  document.getElementById("nickName").focus();
+			  return;
+			}
+			if(name.trim() == "") {
+			  alert("성명을 입력해주세요.")
+			  document.getElementById("name").focus();
+			  return;
+			}
+			if(!regName.test(name)) {
+			  alert("성명은 길이 2~20자의 한글, 영문만 입력가능합니다!")
+			  document.getElementById("name").focus();
+			  return;
+			}
+/* 			if(phone.trim() == "") {
+			  alert("전화번호를 입력해주세요!")
+			  return;
+			}
+			if(!regTel.test(phone)) {
+			  alert("전화번호 형식은 '02(0)-123(4)-5678' 입니다!")
+			  document.getElementById("phone").focus();
+			  return;
+			}
+			if(email.trim() == "") {
+			  alert("이메일을 입력해주세요!")
+			  return;
+			}
+			if(!regEmail.test(email)) {
+			  alert("이메일 형식이 올바르지 않습니다!")
+			  document.getElementById("email").focus();
+			  return;
+			} */
 			
 			
 			// form 에서 따로 입력하는 부분들을 한꺼번에 합쳐서 DB 저장하는 처리 (전화번호, 주소(밑에 작성함), 이메일 등)
@@ -86,6 +99,7 @@
 			let ext = fName.substring(fName.lastIndexOf(".")+1); // 파일명 자르고 확장자만 가져오기
 			let uExt = ext.toUpperCase(); // 확장자명 대문자로 변경
 			
+			// submitFlag 스위칭 사용으로 회원가입 최종 완료 여부 체크
 			let submitFlag = 0;
 			
 			if(fName.trim() == "") {
@@ -121,7 +135,7 @@
 			// 전송 전 모든 체크 끝났다면, submitFlag가 1이 되도록 처리 후 서버로 전송!
 			if(submitFlag == 1){
 				// 아이디, 닉네임 중복체크 버튼 눌렀어? -> 가입 가능
-						
+				
 				// 전화번호 하나로 묶어 서버 전송
 				myform.tel.value = tel;
 				
@@ -159,6 +173,15 @@
 		  }
 	  }
 	  
+	  // ID 재입력 중복체크 버튼활성화
+	  function reMidCheck() {
+		  let midCheckBtn = document.myform.midCheckBtn;
+		  myform.midDuplication.value = "midUnCheck";
+		  midCheckBtn.disabled = false;
+		  midCheckBtn.style.opacity = 1;
+		  midCheckBtn.style.cursor = "pointer";
+	  }
+	  
 	  // 닉네임 중복체크
 	  function nickCheck() {
 		  let nickName = myform.nickName.value;
@@ -184,8 +207,8 @@
     <h2>회 원 가 입</h2>
     <br/>
     <div class="form-group">
-      <label for="mid">아이디 &nbsp; &nbsp;<input type="button" value="아이디 중복체크" class="btn btn-secondary btn-sm" onclick="idCheck()"/></label>
-      <input type="text" class="form-control" name="mid" id="mid" placeholder="아이디를 입력하세요." required autofocus/>
+      <label for="mid">아이디 &nbsp; &nbsp;<input type="button" value="아이디 중복체크" name="midCheckBtn" class="btn btn-secondary btn-sm" onclick="idCheck()"/></label>
+      <input type="text" class="form-control" name="mid" id="mid" onkeydown="reMidCheck()" placeholder="아이디를 입력하세요." required autofocus/>
     </div>
     <div class="form-group">
       <label for="pwd">비밀번호</label>
@@ -362,6 +385,7 @@
     <input type="hidden" name="photo" />
     <input type="hidden" name="tel" />
     <input type="hidden" name="email" />
+    <input type="hidden" name="midDuplication" value="midUnCheck" />
   </form>
 </div>
 <p><br/></p>

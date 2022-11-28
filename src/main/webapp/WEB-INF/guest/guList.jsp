@@ -26,6 +26,13 @@
   		/* if (ans) location.href="${ctp}/guDelete.gu?idx=${vo.idx}"; /* 서버변수(vo.idx) 사용 XXX. 23행에 작성한 idx(Javascript 변수)를 작성해야 함 */
   		if(ans) location.href="${ctp}/guDelete.gu?idx="+idx;
   	}
+  	
+  	function pageCheck() {
+	    /* let pageSize = $('select[name="pageSize"]').val(); */
+	    /* let pageSize = $("#pageSize option:selected").val(); */
+	    let pageSize = $("#pageSize").val();
+	    location.href="${ctp}/guList.gu?pageSize="+pageSize;
+    }
   </script>
   
 </head>
@@ -48,6 +55,15 @@
 	</table>
 	<table class="table table-borderless m-0 p-0">
 		<tr>
+			<td class="text-left">
+	      <select name="pageSize" id="pageSize" onchange="pageCheck()">
+	        <!-- <option value="" selected disabled>건 별 조회</option> -->
+	        <option value="5" <c:if test="${pageSize == 5}">selected</c:if>>5건</option>
+	        <option value="10" <c:if test="${pageSize == 10}">selected</c:if>>10건</option>
+	        <option value="15" <c:if test="${pageSize == 15}">selected</c:if>>15건</option>
+	        <option value="20" <c:if test="${pageSize == 20}">selected</c:if>>20건</option>
+	      </select>
+	 		 </td>
 			<td class="text-right">
 				<!-- 첫 페이지 / 이전 페이지 / (현재 페이지 번호 / 총 페이지 수) / 다음 페이지 / 마지막페이지 -->
 				<c:if test="${pag > 1}">

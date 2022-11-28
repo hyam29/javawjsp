@@ -1,4 +1,4 @@
-package mamber;
+package member;
 
 import java.io.IOException;
 
@@ -6,6 +6,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import guest.GuestDAO;
 
 public class MemMainCommand implements MemberInterface {
 
@@ -17,6 +19,9 @@ public class MemMainCommand implements MemberInterface {
 		
 		MemberDAO memDao = new MemberDAO();
 		MemberVO vo = memDao.getLoginCheck(mid);
+		
+		GuestDAO dao = new GuestDAO();
+		
 
 		// 레벨을 문자로 처리해서 넘겨준다.
 		String strLevel = "";
@@ -33,6 +38,9 @@ public class MemMainCommand implements MemberInterface {
 		request.setAttribute("strLevel", strLevel);
 		
 		// 사용자가 방명록에서 글 쓴 횟수 가져오기 -> 과제
+		String name = vo.getName();
+		int guCntNum = dao.getGuInputCnt(name);
+		request.setAttribute("guCnt", guCntNum);
 	}
 
 }
