@@ -19,7 +19,9 @@
   	let url = "<%=url%>"; --%>
   	let msg = "${msg}";
   	let url = "${url}";
+  	let val = "${val}";
   	
+  	// guest
   	if(msg == "guInputOk") msg = "방명록에 글이 등록되었습니다!";
   	else if(msg == "guInputNo") msg = "글 등록에 실패하였습니다.";
   	else if(msg == "adminLoginOk") msg = "관리자 인증 성공!";
@@ -27,6 +29,11 @@
   	else if(msg == "adminLogoutOk") msg = "관리자님 로그아웃 되었습니다.";
   	else if(msg == "guDeleteOk") msg = "방명록의 글이 삭제되었습니다.";
   	else if(msg == "guDeleteNo") msg = "삭제를 취소하셨습니다.";
+  	
+  	// member
+  	else if(msg == "loginOk") msg = val+"님 반갑습니다!";
+  	else if(msg == "loginNo") msg = "로그인에 실패하였습니다.";
+  	else if(msg == "memLogoutOk") msg = val+"님 로그아웃 되었습니다. 좋은하루 되세요!";
   	
   	alert(msg);
   	if(url != "") location.href = url;
@@ -36,7 +43,7 @@
   	
 	  	alert("방명록에 글이 등록되었습니다!");
 	  	location.href="${ctp}/guList.gu";
-	  	위의 코드 두줄은 쌍으로 다녀야 함!!!
+	  	위의 코드 두줄(안내메세지+하이퍼링크)은 쌍으로 다녀야 함!!!
 	  	변수에 담으면 여러 메세지 창 띄우기 가능해서 18행부터 다시 작성
   	*/
   	
