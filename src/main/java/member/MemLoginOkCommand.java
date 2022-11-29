@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import conn.SecurityUtil;
+
 public class MemLoginOkCommand implements MemberInterface {
 
 	@Override
@@ -22,10 +24,20 @@ public class MemLoginOkCommand implements MemberInterface {
 //		MemberVO vo = dao.getLoginCheck(mid, pwd); // id만 가져가면 또 써먹을 수 있지만, pwd와 같이 가져가면 한번밖에 사용하지 못함
 		MemberVO vo = dao.getLoginCheck(mid);
 		
-		if(vo == null || !pwd.equals(vo.getPwd())) {
-			request.setAttribute("msg", "loginNo");
-			request.setAttribute("url", request.getContextPath()+"/memLogin.mem");
-			return;
+		// 비밀번호 암호화가 되어있으니 더이상 아래 코드로는 비교 불가
+		/*
+		 * if(vo == null || !pwd.equals(vo.getPwd())) { request.setAttribute("msg",
+		 * "loginNo"); request.setAttribute("url",
+		 * request.getContextPath()+"/memLogin.mem"); return; }
+		 */
+		
+		// 입력되어 넘어온 비밀번호를 암호화시킨 후 DB에 저장된 pwd와 비교
+		SecurityUtil security = new SecurityUtil();
+		pwd = security.encryptSHA256(pwd);
+		if(vo == null || !pwd.equals(vo.getPwd())) { 
+			request.setAttribute("msg","loginNo"); 
+			request.setAttribute("url",
+			request.getContextPath()+"/memLogin.mem"); return; 
 		}
 		
 		/*

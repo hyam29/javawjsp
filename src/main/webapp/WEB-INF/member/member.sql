@@ -13,7 +13,7 @@ create table member (
 	email varchar(50) not null,									/* 이메일(아이디/비밀번호 분실시 사용) - 형식체크 필수 */
 	homePage varchar(50) not null,							/* 홈페이지(블로그) 주소 */
 	job varchar(20),														/* 회원 직업 */
-	hobby varchar(20),													/* 회원 취미(2개 이상은 '/' 로 구분처리)*/
+	hobby varchar(100),													/* 회원 취미(2개 이상은 '/' 로 구분처리)*/
 	photo varchar(100) default 'noimage.jpg',		/* 회원 사진 */	
 	content text,																/* 회원 자기 소개 */
 	userInfor char(6) default '공개',							/* 회원정보 공개여부(공개/비공개) */ 
@@ -34,3 +34,5 @@ desc member;
 
 /* 더미 데이터 */
 insert into member values (default, 'admin', '1234', '관리해용', '관리자', default, default, '010-7777-7777', '충북 청주시 흥덕구', 'yam.h29@daum.net', 'http://yam.h20@blog.com', '프리랜서', '등산/바둑', default, '관리자예요.', default, default, default, 0, default, default, default, default);
+
+delete from member where idx = 1;
