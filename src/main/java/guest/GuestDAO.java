@@ -144,23 +144,14 @@ public class GuestDAO {
 		return totRecCnt;
 	}
 
-	// 방명록 작성 총 개수 구하기
-	public int getGuInputCnt(String name) {
-		int guCntNum = 0;
-		try {
-			sql = "select count(*) as cnt from guest where name = ?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, name);
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				guCntNum = rs.getInt("cnt");
-			}
-		} catch (Exception e) {
-			System.out.println("SQL 에러" + e.getMessage());
-		} finally {
-			rsClose();
-		}
-		return guCntNum;
-	}
+	/*
+	 * // 방명록 작성 총 개수 구하기 public int getGuInputCnt(String name) { int guCntNum = 0;
+	 * try { sql = "select count(*) as cnt from guest where name = ?"; pstmt =
+	 * conn.prepareStatement(sql); pstmt.setString(1, name); rs =
+	 * pstmt.executeQuery();
+	 * 
+	 * if(rs.next()) { guCntNum = rs.getInt("cnt"); } } catch (Exception e) {
+	 * System.out.println("SQL 에러" + e.getMessage()); } finally { rsClose(); }
+	 * return guCntNum; }
+	 */
 }

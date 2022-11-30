@@ -24,7 +24,7 @@
 	<p>오늘 방문횟수 : ${todayCnt}</p>
 	
 	<h4>활동 내역</h4>
-	<p>방명록에 올린 글 수 : ${guCnt}</p>
+	<p>방명록에 올린 글 수 : <span class="viewCheck">${guestCnt}</span></p>
 	<p>게시판에 올린 글 수 : </p>
 	<p>자료실에 올린 글 수  : </p>
 </div>

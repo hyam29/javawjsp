@@ -17,12 +17,10 @@ public class MemMainCommand implements MemberInterface {
 		
 		String mid = (String) session.getAttribute("sMid");
 		
-		MemberDAO memDao = new MemberDAO();
-		MemberVO vo = memDao.getLoginCheck(mid);
 		
-		GuestDAO dao = new GuestDAO();
+		MemberDAO dao = new MemberDAO();
+		MemberVO vo = dao.getLoginCheck(mid);
 		
-
 		// 레벨을 문자로 처리해서 넘겨준다.
 		String strLevel = "";
 		if(vo.getLevel() == 0) strLevel = "관리자";
@@ -37,10 +35,11 @@ public class MemMainCommand implements MemberInterface {
 		request.setAttribute("visitCnt", vo.getVisitCnt());
 		request.setAttribute("strLevel", strLevel);
 		
-		// 사용자가 방명록에서 글 쓴 횟수 가져오기 -> 과제
-		String name = vo.getName();
-		int guCntNum = dao.getGuInputCnt(name);
-		request.setAttribute("guCnt", guCntNum);
+		
+	// 사용자가 방명록에서 글쓴 회수 가져오기
+	int guestCnt = dao.getGuestWrite(mid, vo.getName(), vo.getNickName());
+	request.setAttribute("guestCnt", guestCnt);
+
 	}
 
 }

@@ -1,4 +1,4 @@
-package member;
+package admin;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,7 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class MemListCommand implements MemberInterface {
+import member.MemberDAO;
+import member.MemberVO;
+
+public class AdMemListCommand implements AdminInterface {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

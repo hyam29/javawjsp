@@ -31,13 +31,15 @@ public class MemLoginOkCommand implements MemberInterface {
 		 * request.getContextPath()+"/memLogin.mem"); return; }
 		 */
 		
+		
+		
 		// 입력되어 넘어온 비밀번호를 암호화시킨 후 DB에 저장된 pwd와 비교
 		SecurityUtil security = new SecurityUtil();
 		pwd = security.encryptSHA256(pwd);
-		if(vo == null || !pwd.equals(vo.getPwd())) { 
+		if(vo == null || !pwd.equals(vo.getPwd()) || vo.getUserDel().equals("OK")) { 
 			request.setAttribute("msg","loginNo"); 
-			request.setAttribute("url",
-			request.getContextPath()+"/memLogin.mem"); return; 
+			request.setAttribute("url", request.getContextPath()+"/memLogin.mem"); 
+			return; 
 		}
 		
 		/*

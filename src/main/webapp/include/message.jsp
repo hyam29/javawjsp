@@ -45,6 +45,11 @@
   	else if(msg == "memUpdateOk") msg = "회원정보가 변경되었습니다.";
   	else if(msg == "memUpdateNo") msg = "회원정보 변경에 실패했습니다.";
   	
+  	//admin
+  	else if(msg == "levelCheckOk") msg = "해당 회원의 등급이 변경되었습니다.";
+  	else if(msg == "memberDelOk") msg = "회원탈퇴가 완료되었습니다. 안녕히가세요.";
+  	else if(msg == "adMemberDelOk") msg = "탈퇴 신청한 회원의 정보를 삭제했습니다.";
+  	
   	alert(msg);
   	if(url != "") location.href = url;
   	
