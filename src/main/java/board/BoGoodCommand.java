@@ -1,4 +1,4 @@
-package admin;
+package board;
 
 import java.io.IOException;
 
@@ -6,18 +6,15 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class AdMemberDelCommand implements AdminInterface {
+public class BoGoodCommand implements BoardInterface {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int idx = Integer.parseInt(request.getParameter("idx"));
 		
-		AdminDAO dao = new AdminDAO();
+		BoardDAO dao = new BoardDAO();
 		
-		dao.setMemberDel(idx);
-		
-		request.setAttribute("msg", "adMemberDelOk");
-		request.setAttribute("url", request.getContextPath()+"/adMemList.ad");
+		dao.setBoGood(idx);
 	}
 
 }

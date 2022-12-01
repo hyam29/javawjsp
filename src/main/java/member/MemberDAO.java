@@ -141,7 +141,7 @@ public class MemberDAO {
 	}
 
 	// 회원 리스트 조회 처리
-	public ArrayList<MemberVO> getMemList(int startIndexNo, int pageSize, int level) {
+	public ArrayList<MemberVO> getMemList(int startIndexNo, int pageSize, String mid, int level) {
 		ArrayList<MemberVO> vos = new ArrayList<>();
 		try {
 			if(level != 0) {
@@ -261,12 +261,38 @@ public class MemberDAO {
 		return guestCnt;
 	}
 
+	/*
+	 * //총 레코드 건수 구하기 public int totRecCnt(String mid, int level) { int totRecCnt =
+	 * 0; try { sql = "select count(*) as cnt from member"; pstmt =
+	 * conn.prepareStatement(sql); rs = pstmt.executeQuery(); rs.next(); totRecCnt =
+	 * rs.getInt("cnt"); } catch (SQLException e) { System.out.println("SQL 에러 : " +
+	 * e.getMessage()); } finally { getConn.rsClose(); } return totRecCnt; }
+	 */
+	
+	
 	//총 레코드 건수 구하기
-	public int totRecCnt() {
+	public int totRecCnt(String mid, int level) {
 		int totRecCnt = 0;
 		try {
-			sql = "select count(*) as cnt from member";
-			pstmt = conn.prepareStatement(sql);
+			if(mid.equals("")) {	// 전체리스트
+				if(level != 0) {		// 일반사용자
+					sql = "select count(*) as cnt from member where userInfor = '공개'";
+				}
+				else {		// 관리자
+					sql = "select count(*) as cnt from member";
+				}
+				pstmt = conn.prepareStatement(sql);
+			}
+			else {		// 조건 리스트
+				if(level != 0) {
+					sql = "select count(*) as cnt from member where userInfor = '공개' and mid like ?";
+				}
+				else {
+					sql = "select count(*) as cnt from member where mid like ?";
+				}
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, "%"+mid+"%");
+			}
 			rs = pstmt.executeQuery();
 			rs.next();
 			totRecCnt = rs.getInt("cnt");
@@ -277,6 +303,7 @@ public class MemberDAO {
 		}
 		return totRecCnt;
 	}
+	
 
 	// 회원 자료 검색
 	public ArrayList<MemberVO> getMemberSearch(String mid) {

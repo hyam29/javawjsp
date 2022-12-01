@@ -33,13 +33,17 @@
     		$("#mid").focus();
     		return false;
     	}
-    	
     	// 일반 방식
     	/* location.href = "${ctp}/idSearchTest2?mid="+mid; */
+    	
+    	
+    	
+    	
     	
     	// aJax 방식 (제이쿼리 방식 // java => .ajax();)
     	/* 문자는 "" 둘러쌈 // 구분자는 , 로 구분
     		type(=method): ajax는 get 많이 사용
+    		url (=action): 어디로 보낼지 주소 작성(서블릿)
     		data {키(변수):값, idx: idx} // 여러 변수 사용시에는 변수를 전역변수로 생성해서 작성
     		--------------------------------------- 여기까지 서버 전송구간
     		contextType: "application/json",
@@ -73,6 +77,7 @@
     		}
     	});
     }
+    
     function idCheck3() {
     	let mid = $("#mid").val();
     	
@@ -89,7 +94,7 @@
     		success: function(res) {
     			$("#demo").html(res);
     			let str = res.split("/");
-    			$("#tMid").html(str[0]);
+    			$("#tMid").html(str[0]); // 왜 tMid 썼었지?
     			$("#name").html(str[1]);
     			$("#nickName").html(str[2]);
     			$("#gender").html(str[3]);

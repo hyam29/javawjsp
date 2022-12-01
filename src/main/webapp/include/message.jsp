@@ -45,13 +45,19 @@
   	else if(msg == "memUpdateOk") msg = "회원정보가 변경되었습니다.";
   	else if(msg == "memUpdateNo") msg = "회원정보 변경에 실패했습니다.";
   	
-  	//admin
+  	// admin
   	else if(msg == "levelCheckOk") msg = "해당 회원의 등급이 변경되었습니다.";
   	else if(msg == "memberDelOk") msg = "회원탈퇴가 완료되었습니다. 안녕히가세요.";
   	else if(msg == "adMemberDelOk") msg = "탈퇴 신청한 회원의 정보를 삭제했습니다.";
   	
+  	// board
+  	else if(msg == "boInputOk") msg = "게시글이 등록되었습니다.";
+  	else if(msg == "boInputNo") msg = "게시글 등록에 실패하였습니다.";
+  	
   	alert(msg);
   	if(url != "") location.href = url;
+  	
+  	
   	
   	/*
   		여기는 '메세지 컨트롤러'

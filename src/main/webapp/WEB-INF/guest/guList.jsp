@@ -31,7 +31,7 @@
 	    /* let pageSize = $('select[name="pageSize"]').val(); */
 	    /* let pageSize = $("#pageSize option:selected").val(); */
 	    let pageSize = $("#pageSize").val();
-	    location.href="${ctp}/guList.gu?pageSize="+pageSize;
+	    location.href="${ctp}/guList.gu?pageSize="+pageSize+"&pag=${pag}";
     }
   </script>
   
@@ -58,10 +58,10 @@
 			<td class="text-left">
 	      <select name="pageSize" id="pageSize" onchange="pageCheck()">
 	        <!-- <option value="" selected disabled>건 별 조회</option> -->
-	        <option value="5" <c:if test="${pageSize == 5}">selected</c:if>>5건</option>
-	        <option value="10" <c:if test="${pageSize == 10}">selected</c:if>>10건</option>
-	        <option value="15" <c:if test="${pageSize == 15}">selected</c:if>>15건</option>
-	        <option value="20" <c:if test="${pageSize == 20}">selected</c:if>>20건</option>
+	        <option value="5" ${pageSize==5   ? "selected" : ''}> 5건</option>
+					<option value="10" ${pageSize==10 ? "selected" : ''}>10건</option>
+					<option value="15" ${pageSize==15 ? "selected" : ''}>15건</option>
+					<option value="20" ${pageSize==20 ? "selected" : ''}>20건</option>
 	      </select>
 	 		 </td>
 			<td class="text-right">
@@ -132,27 +132,27 @@
 	<div class="text-center">
 		<ul class="pagination justify-content-center">
 			<c:if test="${pag > 1}">
-				 <li class="page-item"><a class="page-link text-secondary" href="${ctp}/guList.gu?pag=1">첫 페이지</a></li>
+				 <li class="page-item"><a class="page-link text-secondary" href="${ctp}/guList.gu?pageSize=${pageSize}&pag=1">첫 페이지</a></li>
 			</c:if>
 				<c:if test="${curBlock > 0}">
-					 <li class="page-item"><a class="page-link text-secondary" href="${ctp}/guList.gu?pag=${(curBlock-1)*blockSize + 1}">이전블록</a></li>
+					 <li class="page-item"><a class="page-link text-secondary" href="${ctp}/guList.gu?pageSize=${pageSize}&pag=${(curBlock-1)*blockSize + 1}">이전블록</a></li>
 				</c:if>
 				
 				<c:forEach var="i" begin="${(curBlock)*blockSize + 1}" end="${(curBlock)*blockSize + blockSize}" varStatus="st">
 				<!-- begin: 0블록*3+1 = 1페이지 / 1블록*3+1 = 4페이지  -->
 					<c:if test="${i <= totPage && i == pag}"> <!-- 자료가 없으면 마지막 블록에서는 페이지 표시 안되게끔 if문 추가 -->
-						 <li class="page-item active"><a class="page-link bg-secondary border-secondary" href="${ctp}/guList.gu?pag=${i}">${i}</a></li>
+						 <li class="page-item active"><a class="page-link bg-secondary border-secondary" href="${ctp}/guList.gu?pageSize=${pageSize}&pag=${i}">${i}</a></li>
 					</c:if>
 					<c:if test="${i <= totPage && i != pag}">
-						 <li class="page-item"><a class="page-link text-secondary" href="${ctp}/guList.gu?pag=${i}">${i}</a></li>
+						 <li class="page-item"><a class="page-link text-secondary" href="${ctp}/guList.gu?pageSize=${pageSize}&pag=${i}">${i}</a></li>
 					</c:if>
 				</c:forEach>
 				
 				<c:if test="${curBlock < lastBlock}">
-					 <li class="page-item"><a class="page-link text-secondary" href="${ctp}/guList.gu?pag=${(curBlock+1)*blockSize + 1}">다음블록</a></li>
+					 <li class="page-item"><a class="page-link text-secondary" href="${ctp}/guList.gu?pageSize=${pageSize}&pag=${(curBlock+1)*blockSize + 1}">다음블록</a></li>
 				</c:if>
 			<c:if test="${pag < totPage}">
-				 <li class="page-item"><a class="page-link text-secondary" href="${ctp}/guList.gu?pag=${totPage}">마지막 페이지</a></li>
+				 <li class="page-item"><a class="page-link text-secondary" href="${ctp}/guList.gu?pageSize=${pageSize}&pag=${totPage}">마지막 페이지</a></li>
 			</c:if>
 		</ul>
 	</div>

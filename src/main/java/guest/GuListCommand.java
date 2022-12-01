@@ -60,6 +60,7 @@ public class GuListCommand implements GuestInterface {
 		request.setAttribute("pag", pag);
 		request.setAttribute("totPage", totPage);
 		request.setAttribute("curScrStartNo", curScrStartNo);
+		request.setAttribute("pageSize", pageSize);
 		request.setAttribute("blockSize", blockSize);
 		request.setAttribute("curBlock", curBlock);
 		request.setAttribute("lastBlock", lastBlock);

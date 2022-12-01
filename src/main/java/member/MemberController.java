@@ -8,7 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 @SuppressWarnings("serial")
 @WebServlet("*.mem")
@@ -29,6 +28,8 @@ public class MemberController extends HttpServlet {
 			dispatcher.forward(request, response);
 		}*/
 		if(com.equals("/memLogin")) {
+			command = new MemLoginCommand();
+			command.execute(request, response);
 			viewPage += "/memLogin.jsp";
 		}
 		else if(com.equals("/memLoginOk")) {

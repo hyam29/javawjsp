@@ -48,13 +48,14 @@
     </tr>
     <c:forEach var="vo" items="${vos}" varStatus="st">
       <tr>
-        <td>${vo.idx}</td>
+        <td>${curScrStartNo}</td>
         <!-- 상세정보 조회 후 돌아가기 버튼을 눌렀을 때 같은 페이지번호로 돌아가야하기 때문에, mid와 pag를 넘겨줌 -->
         <td><a href="${ctp}/memInfor.mem?mid=${vo.mid}&pag=${pag}">${vo.mid}</a></td> 
         <td>${vo.nickName}</td>
         <td>${vo.name}<c:if test="${sLevel == 0 && vo.userInfor == '비공개'}"><font color='red'>(비공개)</font></c:if></td>
         <td>${vo.gender}</td>
       </tr>
+      <c:set var="curScrStartNo" value="${curScrStartNo-1}" />
     </c:forEach>
     <tr><td colspan="5" class="m-0 p-0"></td></tr>
   </table>
@@ -64,24 +65,24 @@
 <div class="text-center">
   <ul class="pagination justify-content-center">
     <c:if test="${pag > 1}">
-      <li class="page-item"><a class="page-link text-secondary" href="${ctp}/memList.mem?pag=1">첫페이지</a></li>
+      <li class="page-item"><a class="page-link text-secondary" href="${ctp}/memList.mem?mid=${mid}&pag=1">첫페이지</a></li>
     </c:if>
     <c:if test="${curBlock > 0}">
-      <li class="page-item"><a class="page-link text-secondary" href="${ctp}/memList.mem?pag=${(curBlock-1)*blockSize + 1}">이전블록</a></li>
+      <li class="page-item"><a class="page-link text-secondary" href="${ctp}/memList.mem?mid=${mid}&pag=${(curBlock-1)*blockSize + 1}">이전블록</a></li>
     </c:if>
     <c:forEach var="i" begin="${(curBlock)*blockSize + 1}" end="${(curBlock)*blockSize + blockSize}" varStatus="st">
       <c:if test="${i <= totPage && i == pag}">
-    		<li class="page-item active"><a class="page-link bg-secondary border-secondary" href="${ctp}/memList.mem?pag=${i}">${i}</a></li>
+    		<li class="page-item active"><a class="page-link bg-secondary border-secondary" href="${ctp}/memList.mem?mid=${mid}&pag=${i}">${i}</a></li>
     	</c:if>
       <c:if test="${i <= totPage && i != pag}">
-    		<li class="page-item"><a class="page-link text-secondary" href="${ctp}/memList.mem?pag=${i}">${i}</a></li>
+    		<li class="page-item"><a class="page-link text-secondary" href="${ctp}/memList.mem?mid=${mid}&pag=${i}">${i}</a></li>
     	</c:if>
     </c:forEach>
     <c:if test="${curBlock < lastBlock}">
-      <li class="page-item"><a class="page-link text-secondary" href="${ctp}/memList.mem?pag=${(curBlock+1)*blockSize + 1}">다음블록</a></li>
+      <li class="page-item"><a class="page-link text-secondary" href="${ctp}/memList.mem?mid=${mid}&pag=${(curBlock+1)*blockSize + 1}">다음블록</a></li>
     </c:if>
     <c:if test="${pag < totPage}">
-      <li class="page-item"><a class="page-link text-secondary" href="${ctp}/memList.mem?pag=${totPage}">마지막페이지</a></li>
+      <li class="page-item"><a class="page-link text-secondary" href="${ctp}/memList.mem?mid=${mid}&pag=${totPage}">마지막페이지</a></li>
     </c:if>
   </ul>
 </div>
