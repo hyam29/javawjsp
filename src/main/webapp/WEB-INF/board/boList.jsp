@@ -16,6 +16,17 @@
 			location.href="${ctp}/boList.bo?pageSize="+pageSize+"&pag=${pag}";
 			/*JSP 변수는 따당으로, pag는 담아둔거라 EL표기법으로 작성*/
   	}
+  	
+  	function searchCheck() {
+  		let searchString = $("#searchString").val();
+  		if(searchString.trim() == "") {
+  			alert("찾고자 하는 검색어를 입력하세요.");
+  			searchForm.searchString.focus();
+  		}
+  		else {
+  			searchForm.submit();
+  		}
+  	}
   </script>
 </head>
 <body>
@@ -91,6 +102,24 @@
   </ul>
 </div>
 <!-- 블록 페이지 끝 -->
+<br/>
+<!--  검색기 처리 시작 -->
+<div class="container text-center">
+	<form name="searchForm" method="post" action="${ctp}/boSearch.bo">
+		<b>검색 </b>
+		<select name="search" class="m-2">
+			<option value="title">글제목</option>
+			<option value="nickName">글쓴이</option>
+			<option value="content">글내용</option>
+		</select>
+			<input type="text" name="searchString" id="searchString" />
+			<input type="button" value="검색" onclick="searchCheck()" class="btn btn-outline-secondary btn-sm" />
+			
+			<input type="hidden" name="pag" value="${pag}" />
+			<input type="hidden" name="pageSize" value="${pageSize}" />
+	</form>
+</div>
+<!-- 검색기 처리 끝 -->
 <p><br/></p>
 <jsp:include page="/include/footer.jsp" />
 </body>

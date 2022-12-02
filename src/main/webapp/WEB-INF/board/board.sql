@@ -16,11 +16,29 @@ create table board (
 	primary key (idx)
 );
 
+/* 게시판에 댓글 달기 (해당 게시글의 idx의 댓글이기때문에 외래키 지정 필요) */
+create table boardReply (
+	idx int not null auto_increment ,		/* 댓글의 고유번호 */
+	boardIdx int not null,							/* 원글의 고유번호(외래키 지정) */
+	nickName varchar(20) not null,			/* 댓쓴이의 닉네임 */
+	mid varchar(20) not null,						/* 댓쓴이의 아이디(닉네임 수정시 필요) */
+	wDate datetime default now(),				/* 댓글 작성일자 */
+	hostIp varchar(50) not null,				/* 댓쓴이의 PC IP */
+	content text not null,							/* 댓글 내용 */
+	
+	primary key (idx),
+	foreign key (boardIdx) references board(idx) /* 외래키 지정 */
+	/* on update cascade 부모키와 함께 업데이트 */
+	/* on delete restrict  부모키와 함께 삭제 */
+);
+
 desc board;
+desc boardReply;
 
 insert into board values (default, '관리맨', '게시판 서비스를 시작합니다.', 'admin1234@gmail.com', 'http://', '이곳은 게시판입니다.', default, '192.168.50.190', default, default, 'admin');
 
 select * from board;
+select * from boardReply;
 
 /* 날짜 처리 연습 */
 select now(); /* now() : 오늘날짜와 시간을 보여준다. */ 
@@ -83,3 +101,9 @@ select timestampdiff(hour, wDate, now()) as hour_diff from board;
 select *, timestampdiff(hour, wDate, now()) as hour_diff from board;
 
 select *, datediff(now(), wDate) as day_diff, timestampdiff(hour, wDate, now()) as hour_diff from board;
+
+
+/* 이전글 체크 */
+select * from board where idx < 12 order by idx desc limit 1;
+/* 다음글 체크 */
+select * from board where idx > 7 limit 1;

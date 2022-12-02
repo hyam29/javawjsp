@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import study2.ajax.UserDAO;
 import study2.ajax.UserVO;
 
-public class UserSearchCommand implements studyInterface {
+public class UserSearchCommand implements StudyInterface {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

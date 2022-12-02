@@ -1,25 +1,21 @@
-package study2;
+package board;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import study2.ajax.UserDAO;
-import study2.ajax.UserVO;
-
-public class UserListCommand implements StudyInterface {
+public class BoGoodPlusMinusCommand implements BoardInterface {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		UserDAO dao = new UserDAO();
+		int idx = Integer.parseInt(request.getParameter("idx"));
+		int goodCnt = Integer.parseInt(request.getParameter("goodCnt"));
 		
-		ArrayList<UserVO> vos = dao.getUserList();
+		BoardDAO dao = new BoardDAO();
 		
-		request.setAttribute("vos", vos);
-		
+		dao.setGoodPlusMinus(idx, goodCnt);
 	}
 
 }

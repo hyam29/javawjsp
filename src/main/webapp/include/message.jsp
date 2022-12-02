@@ -51,12 +51,18 @@
   	else if(msg == "adMemberDelOk") msg = "탈퇴 신청한 회원의 정보를 삭제했습니다.";
   	
   	// board
-  	else if(msg == "boInputOk") msg = "게시글이 등록되었습니다.";
-  	else if(msg == "boInputNo") msg = "게시글 등록에 실패하였습니다.";
+  	else if(msg == "boInputOk") msg = "게시글이 등록되었습니다!";
+  	else if(msg == "boInputNo") msg = "게시글 등록 실패.";
+  	else if(msg == "boDeleteOk") msg = "게시글이 삭제되었습니다.";
+  	else if(msg == "boDeleteNo") msg = "게시글 삭제 실패.";
+  	else if(msg == "userCheckNo") msg = "비정상적인 접근입니다. 해커세용?";
+  	else if(msg == "boUpdateOk") msg = "게시글 수정되었습니다!";
+  	else if(msg == "boUpdateNo") msg = "게시글 수정 실패.";
   	
+
+  	// admin에 있음...
   	alert(msg);
   	if(url != "") location.href = url;
-  	
   	
   	
   	/*

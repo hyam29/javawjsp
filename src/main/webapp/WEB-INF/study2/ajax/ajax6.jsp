@@ -112,6 +112,7 @@
     	});
     }
     
+    // vo 처리
     function idCheck5() {
     	let mid = $("#mid").val();
     	
@@ -127,13 +128,61 @@
     		data : {mid: mid},
     		success: function(res) {
     			$("#demo").html(res);
-    			let jsonRes = JSON.parse(res);	// json형식으로 넘어온 자료를 다시 파싱과정을 거쳐서 일반 문자열로 변환시켜준다.
+    			let jsonRes = JSON.parse(res);
     			
     			$("#tMid").html(jsonRes.mid);
     			$("#name").html(jsonRes.name);
     			$("#nickName").html(jsonRes.nickName);
     			$("#gender").html(jsonRes.gender);
     			$("#point").html(jsonRes.point);
+    		},
+    		error: function() {
+    			alert("전송 실패~~~");
+    		} 
+    	});
+    }
+    
+    // vos 처리
+    function idCheck6() {
+    	let mid = $("#mid").val();
+    	
+    	if(mid.trim() == "") {
+    		alert("아이디를 입력하세요.");
+    		$("#mid").focus();
+    		return false;
+    	}
+    	
+    	$.ajax({
+    		type : "post",
+    		url  : "${ctp}/idSearchTest6",
+    		data : {mid: mid},
+    		success: function(res) {
+    			$("#demo").html(res);
+    			let jsonRes = JSON.parse(res);	// json형식으로 넘어온 자료를 다시 파싱과정을 거쳐서 일반 문자열로 변환시켜준다.
+    			
+    			let tempMid="", tempName="", tempNickName="", tempGender="", tempPoint="";
+    			/*
+    			$("#tMid").html(jsonRes.members[0].mid);
+    			$("#name").html(jsonRes.members[0].name);
+    			$("#nickName").html(jsonRes.members[0].nickName);
+    			$("#gender").html(jsonRes.members[0].gender);
+    			$("#point").html(jsonRes.members[0].point);
+    			*/
+    			
+    			for(let i in jsonRes.members) {
+    				tempMid      += jsonRes.members[i].mid + "/";
+    				tempName     += jsonRes.members[i].name + "/";
+    				tempNickName += jsonRes.members[i].nickName + "/";
+    				tempGender   += jsonRes.members[i].gender + "/";
+    				tempPoint    += jsonRes.members[i].point + "/";
+    			}
+    			
+    			$("#tMid").html(tempMid);
+    			$("#name").html(tempName);
+    			$("#nickName").html(tempNickName);
+    			$("#gender").html(tempGender);
+    			$("#point").html(tempPoint);
+    			
     		},
     		error: function() {
     			alert("전송 실패~~~");
@@ -153,8 +202,9 @@
     <input type="button" value="아이디일반검색1" onclick="idCheck()" class="btn btn-info"/>&nbsp;
     <input type="button" value="아이디검색2" onclick="idCheck2()" class="btn btn-success"/>&nbsp;
     <input type="button" value="아이디검색3" onclick="idCheck3()" class="btn btn-primary"/>&nbsp;
-    <input type="button" value="아이디검색4" onclick="idCheck4()" class="btn btn-primary"/>&nbsp;
-    <input type="button" value="아이디검색5" onclick="idCheck5()" class="btn btn-primary"/>
+    <input type="button" value="아이디검색4" onclick="idCheck4()" class="btn btn-secondary"/>&nbsp;
+    <input type="button" value="아이디검색5" onclick="idCheck5()" class="btn btn-warning"/>&nbsp;
+    <input type="button" value="아이디검색6" onclick="idCheck6()" class="btn btn-danger"/>
     <br/>
     <div>출력결과 : <span id="demo">${name}</span></div>
     <hr/>

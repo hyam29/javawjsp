@@ -1,25 +1,22 @@
-package study2;
+package board;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import study2.ajax.UserDAO;
-import study2.ajax.UserVO;
-
-public class UserListCommand implements StudyInterface {
+public class BoReplyDeleteOkCommand implements BoardInterface {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		UserDAO dao = new UserDAO();
+		int idx = request.getParameter("idx") == null ? 0 : Integer.parseInt(request.getParameter("idx"));
 		
-		ArrayList<UserVO> vos = dao.getUserList();
+		BoardDAO dao = new BoardDAO();
 		
-		request.setAttribute("vos", vos);
+		String res = dao.setBoReplyDeleteOk(idx);
 		
+		response.getWriter().write(res);
 	}
 
 }

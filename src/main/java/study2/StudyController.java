@@ -15,23 +15,22 @@ import javax.servlet.http.HttpSession;
 public class StudyController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		studyInterface command = null;
-		
-		String viewPage = "WEB-INF/study2";
+		StudyInterface command = null;
+		String viewPage = "/WEB-INF/study2";
 		
 		String uri = request.getRequestURI();
 		String com = uri.substring(uri.lastIndexOf("/"), uri.lastIndexOf("."));
 		
-		// 세션이 끊겼다면 작업의 진행을 중지시키고 홈으로 전송시켜 준다. (주소창에서 직접 아이디를 넘겼을 때, 홈페이지 들어가지는 것 방지)
+		// 세션이 끈겼다면 작업의 진행을 중시시키고 홈으로 전송시켜준다.
 		HttpSession session = request.getSession();
-		int level = session.getAttribute("sLevel") == null ? 99 : (int) session.getAttribute("sLevel"); 
-		if(level > 4) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/"); // 홈페이지의 root로 보냄
+		int level = session.getAttribute("sLevel")==null ? 99 : (int) session.getAttribute("sLevel");
+		
+		if(level >= 4) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/");
 			dispatcher.forward(request, response);
 		}
 		
-		
-		if(com.equals("/pass")) {
+		else if(com.equals("/pass")) {
 			viewPage += "/password/pass.jsp";
 		}
 		else if(com.equals("/passOk1")) {
@@ -40,15 +39,12 @@ public class StudyController extends HttpServlet {
 			viewPage += "/password/pass.jsp";
 		}
 		else if(com.equals("/passOk2")) {
-			command = new PassOk2Command();
+			command = new PassOk2Command(); 
 			command.execute(request, response);
 			viewPage += "/password/passOk2.jsp";
 		}
-		else if(com.equals("/ajax1")) {
-			viewPage += "/ajax/ajax1.jsp";
-		}
-		else if(com.equals("/ajax1")) {
-			viewPage += "/ajax/ajax1.jsp";
+		else if(com.equals("/ajax6")) {
+			viewPage += "/ajax/ajax6.jsp";
 		}
 		else if(com.equals("/userList")) {
 			command = new UserListCommand();
@@ -58,11 +54,20 @@ public class StudyController extends HttpServlet {
 		else if(com.equals("/userSearch")) {
 			command = new UserSearchCommand();
 			command.execute(request, response);
-			/* viewPage += "/ajax/userList.jsp"; 이렇게 페이지이동하는 건 동기식. ajax 이므로 비동기식이니까 return으로 작업 끝내줌 */
 			return;
 		}
 		else if(com.equals("/userDel")) {
 			command = new UserDelCommand();
+			command.execute(request, response);
+			return;
+		}
+		else if(com.equals("/userInput")) {
+			command = new UserInputCommand();
+			command.execute(request, response);
+			return;
+		}
+		else if(com.equals("/userUpdate")) {
+			command = new UserUpdateCommand();
 			command.execute(request, response);
 			return;
 		}

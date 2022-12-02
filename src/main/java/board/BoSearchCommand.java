@@ -7,12 +7,43 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class BoListCommand implements BoardInterface {
+public class BoSearchCommand implements BoardInterface {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String search = request.getParameter("search") == null ? "" : request.getParameter("search");
+		String searchString = request.getParameter("searchString") == null ? "" : request.getParameter("searchString");
+		int pageSize = request.getParameter("pageSize")==null ? 5 : Integer.parseInt(request.getParameter("pageSize"));
+		int pag = request.getParameter("pag")==null ? 1 : Integer.parseInt(request.getParameter("pag"));
+		
+		// 글제목, 글쓴이, 글내용
+		// 실제 직접 입력한 값 도 request에 담아서 넘겨줘야 함
+		
 		BoardDAO dao = new BoardDAO();
 		
+		ArrayList<BoardVO> vos = dao.getBoContentSearch(search, searchString);
+		
+		String searchTitle = "";
+		if(search.equals("title")) searchTitle = "글제목";
+		else if(search.equals("nickname")) searchTitle = "글쓴이";
+		else searchTitle = "글내용";
+		
+		request.setAttribute("vos", vos);
+		request.setAttribute("search", search);
+		request.setAttribute("searchString", searchString);
+		request.setAttribute("pag", pag);
+		request.setAttribute("pageSize", pageSize);
+		
+		request.setAttribute("searchCount", vos.size());
+		// 사용자에게 검색된 총 건수 알려주기 위해 vos의 크기를 변수에 담아줌
+		request.setAttribute("searchTitle", searchTitle);
+		// vos 담긴 값들을 다시 한글화 작업
+		
+		
+		
+		
+		
+		/* 페이징처리 하려면 나중에 스스로 하기
 		// 페이징처리 준비 시작
 		int pag = request.getParameter("pag")==null ? 1 : Integer.parseInt(request.getParameter("pag"));
 		// int pageSize = 5;
@@ -37,6 +68,7 @@ public class BoListCommand implements BoardInterface {
 		request.setAttribute("blockSize", blockSize);
 		request.setAttribute("curBlock", curBlock);
 		request.setAttribute("lastBlock", lastBlock);
+		*/
 	}
 
 }
