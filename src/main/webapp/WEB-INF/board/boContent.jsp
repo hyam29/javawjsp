@@ -93,36 +93,36 @@
 					}
 				},
 				error : function() {
-					alert("댓글 달시 전송 오류.");
+					alert("댓글 달기 전송 오류.");
 				}
 				
 			});
 		}
 		
-		// 댓글 삭제 처리
-		function replyDelCheck(idx) {
-			let ans = confirm("해당 댓글을 삭제하시겠습니까?");
-			if(!ans) return false;
-			
-			$.ajax({
-				type : "post",
-				url : "${ctp}/boReplyDeleteOk.bo",
-				data : {idx : idx},
-				success : function(res) {
-					if(res == "1") {
-						alert("댓글이 삭제되었습니다.");
-						location.reload();
-					}
-					else {
-						alert("댓글 삭제 실패.");
-					}
-				},
-				error : function() {
-					alert("댓글 삭제 전송 오류.");
-				}
-			});
-			// data 에 적은 값(뒤에 적은 idx)이 위의 replyDelCheck(idx) 의 idx
+		// 댓글 삭제하기
+    function replyDelCheck(idx) {
+    	let ans = confirm("현재 댓글을 삭제하시겠습니까?");
+    	if(!ans) return false;
+    	
+    	$.ajax({
+    		type  : "post",
+    		url   : "${ctp}/boReplyDeleteOk.bo",
+    		data  : {idx : idx},
+    		success:function(res) {
+    			if(res == "1") {
+    				alert("댓글이 삭제되었습니다.");
+    				location.reload();
+    			}
+    			else {
+    				alert("댓글이 삭제처리 실패");
+    			}
+    		},
+    		error  : function() {
+    			alert("댓글 삭제 전송 오류");
+    		}
+    	});
 		}
+			// data 에 적은 값(뒤에 적은 idx)이 위의 replyDelCheck(idx) 의 idx
   </script>
 </head>
 <body>
@@ -225,7 +225,7 @@
 				<td>${replyVo.wDate}</td>
 				<td>${replyVo.hostIp}</td>
 				<td>
-					<c:if test="${sMid == replyVo.mid || sLevel == 0}">
+					<c:if test="${sLevel == 0 || sMid == replyVo.mid}">
 						<a href="javascript:replyDelCheck(${replyVo.idx})" title="댓글삭제">✖</a> 
 					</c:if>
 				</td>

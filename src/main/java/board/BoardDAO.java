@@ -317,8 +317,8 @@ public class BoardDAO {
 			while(rs.next()) {
 				BoardReplyVO replyVo = new BoardReplyVO();
 				
-				replyVo.setIdx(rs.getInt("idx")); // 부모글 idx
-				replyVo.setBoardIdx(idx); // 댓글 idx
+				replyVo.setIdx(rs.getInt("idx"));
+				replyVo.setBoardIdx(idx);
 				replyVo.setMid(rs.getString("mid"));
 				replyVo.setNickName(rs.getString("nickName"));
 				replyVo.setwDate(rs.getString("wDate"));
@@ -326,7 +326,7 @@ public class BoardDAO {
 				replyVo.setContent(rs.getString("content"));
 				
 				replyVos.add(replyVo);
-				
+				System.out.println("replyVos : " + replyVos);
 			}
 		} catch (SQLException e) {
 			System.out.println("SQL 에러 : " + e.getMessage());
@@ -336,7 +336,7 @@ public class BoardDAO {
 		return replyVos;
 	}
 
-	// 댓글 삭제 처리
+	//댓글 삭제하기
 	public String setBoReplyDeleteOk(int idx) {
 		String res = "0";
 		try {
