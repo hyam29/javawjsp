@@ -10,6 +10,7 @@
   <jsp:include page="/include/bs4.jsp"></jsp:include>
   <script>
   	'use strict';
+  	let openJoinMyForm = opener.document.myform;
   	
   	// 중복 닉네임 재검색
   	function nickNameCheck() {
@@ -24,9 +25,17 @@
   		}
   	}
   	
-  	// 최종 아이디 부모form에 전달하기 (opener : 부모페이지 여는 명령어)
+  	// 최종 닉네임 부모form에 전달하기 (opener : 부모페이지 여는 명령어)
   	function sendCheck() {
-  		opener.window.document.myform.nickName.value = '${nickName}'; 
+  		/* opener.window.document.myform.nickName.value = '${nickName}'; 
+  		opener.window.document.myform.name.focus();
+  		window.close(); */
+  		
+  		openJoinMyForm.nickDuplication.value="nickCheck";
+  		openJoinMyForm.nickNameBtn.disabled=true;
+  		openJoinMyForm.nickNameBtn.style.opacity=0.6;
+  		openJoinMyForm.nickNameBtn.style.cursor="default";
+  		opener.window.document.myform.nickName.value	= '${nickName}'; 
   		opener.window.document.myform.name.focus();
   		window.close();
   	}

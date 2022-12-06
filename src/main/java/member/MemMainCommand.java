@@ -35,6 +35,8 @@ public class MemMainCommand implements MemberInterface {
 		request.setAttribute("visitCnt", vo.getVisitCnt());
 		request.setAttribute("strLevel", strLevel);
 		
+		// 사진 불러오기
+		request.setAttribute("photo", vo.getPhoto());
 		
 	// 사용자가 방명록에서 글쓴 회수 가져오기
 	int guestCnt = dao.getGuestWrite(mid, vo.getName(), vo.getNickName());

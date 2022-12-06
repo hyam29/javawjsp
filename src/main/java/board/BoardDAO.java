@@ -44,9 +44,17 @@ public class BoardDAO {
 		try {
 			//sql = "select *, datediff(now(), wDate) as day_diff from board order by idx desc limit ?, ?";
 			//sql = "select *, timestampdiff(hour, wDate, now()) as hour_diff from board order by idx desc limit ?, ?";
+			/*
 			sql = "select *, datediff(now(), wDate) as day_diff,"
 					+ " timestampdiff(hour, wDate, now()) as hour_diff"
 					+ " from board order by idx desc limit ?, ?";
+			*/
+			/* 댓글도 추가하기 위해 sql 재작성 (새로운 변수 추가됐을 때, VO 추가 필수) */
+			sql = "SELECT *, datediff(now(), wDate) as day_diff, "
+					+ " timestampdiff(hour, wDate, now()) as hour_diff, "
+					+ "(SELECT COUNT(*) FROM boardReply WHERE boardIdx = b.Idx) AS replyCnt "
+					+ "FROM board b ORDER BY idx DESC "
+					+ "limit ?, ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, startIndexNo);
 			pstmt.setInt(2, pageSize);
@@ -68,6 +76,8 @@ public class BoardDAO {
 				
 				vo.setDay_diff(rs.getInt("day_diff")); 
 				vo.setHour_diff(rs.getInt("hour_diff"));
+				
+				vo.setReplyCnt(rs.getInt("replyCnt"));
 				
 				vos.add(vo);
 				
@@ -326,7 +336,7 @@ public class BoardDAO {
 				replyVo.setContent(rs.getString("content"));
 				
 				replyVos.add(replyVo);
-				System.out.println("replyVos : " + replyVos);
+				/* System.out.println("replyVos : " + replyVos); */
 			}
 		} catch (SQLException e) {
 			System.out.println("SQL 에러 : " + e.getMessage());

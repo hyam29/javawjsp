@@ -100,8 +100,9 @@
 		}
 		
 		// 댓글 삭제하기
+		// data 에 적은 값(뒤에 적은 idx)이 replyDelCheck(idx:원댓글의고유번호) 의 idx
     function replyDelCheck(idx) {
-    	let ans = confirm("현재 댓글을 삭제하시겠습니까?");
+    	let ans = confirm("댓글을 삭제하시겠습니까?");
     	if(!ans) return false;
     	
     	$.ajax({
@@ -122,7 +123,7 @@
     		}
     	});
 		}
-			// data 에 적은 값(뒤에 적은 idx)이 위의 replyDelCheck(idx) 의 idx
+			
   </script>
 </head>
 <body>
@@ -210,20 +211,21 @@
 <br/>
 <!-- 댓글 출력 창 시작 -->
 <div class="container">
-	<table class="table table-hover text-center">
-		<tr class="table-dark text-dark">
+	<table class="table table-hover text-left">
+		<tr class="table-warning text-dark">
 			<th>작성자</th>
 			<th>댓글 내용</th>
-			<th>작성일자</th>
-			<th>접속IP</th>
+			<th class="text-center">작성일자</th>
+			<th class="text-center">접속IP</th>
 			<th></th>
 		</tr>
 		<c:forEach var="replyVo" items="${replyVos}">
 			<tr>
 				<td>${replyVo.nickName}</td>	
-				<td>${replyVo.content}</td>
-				<td>${replyVo.wDate}</td>
-				<td>${replyVo.hostIp}</td>
+				<td>${fn:replace(replyVo.content, newLine, "<br/>")}</td>
+				<td class="text-center">${fn:substring(replyVo.wDate, 0, fn:length(replyVo.wDate)-2)}</td>
+<%-- 				<td class="text-center">${fn:substring(replyVo.wDate, 0, 19)}</td> --%>
+				<td class="text-center">${replyVo.hostIp}</td>
 				<td>
 					<c:if test="${sLevel == 0 || sMid == replyVo.mid}">
 						<a href="javascript:replyDelCheck(${replyVo.idx})" title="댓글삭제">✖</a> 
@@ -259,6 +261,7 @@
 		<input type="hidden" name="mid" value="${sMid}" />
 		<input type="hidden" name="nickName" value="${sNickName}" /> --%>
 	</form>
+<!-- 댓글 입력창 끝 -->
 </div>
 <p><br/></p>
 <jsp:include page="/include/footer.jsp" />

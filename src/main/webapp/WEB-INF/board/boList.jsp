@@ -63,7 +63,11 @@
 		<c:forEach var="vo" items="${vos}">
 			<tr>
 				<td>${curScrStartNo}</td>
-				<td class="text-left"><a href="${ctp}/boContent.bo?idx=${vo.idx}&pageSize=${pageSize}&pag=${pag}">${vo.title}</a><c:if test="${vo.hour_diff <= 24}"><img src="${ctp}/images/new.gif" /></c:if></td>
+				<td class="text-left">
+					<a href="${ctp}/boContent.bo?idx=${vo.idx}&pageSize=${pageSize}&pag=${pag}">${vo.title}</a>
+					<c:if test="${vo.replyCnt != 0}">(${vo.replyCnt})</c:if>
+					<c:if test="${vo.hour_diff <= 24}"><img src="${ctp}/images/new.gif" /></c:if>
+				</td>
 				<td>${vo.nickName}</td>
 				<%-- <td>${fn:substring(vo.wDate,0,10)}(${vo.day_diff})</td> --%>
 				<%-- <td>${vo.day_diff > 0 ? fn:substring(vo.wDate,0,10) : fn:substring(vo.wDate,11,19)}</td> --%> <!-- 날짜로 비교 -->

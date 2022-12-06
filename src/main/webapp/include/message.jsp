@@ -58,7 +58,22 @@
   	else if(msg == "userCheckNo") msg = "비정상적인 접근입니다. 해커세용?";
   	else if(msg == "boUpdateOk") msg = "게시글 수정되었습니다!";
   	else if(msg == "boUpdateNo") msg = "게시글 수정 실패.";
+  	else if(msg == "boReplyDataOk") msg = "현재 게시글에 댓글이 존재하여 삭제할 수 없습니다.\n댓글을 삭제해주세요.";
   	
+		// pds
+  	else if(msg == "pdsInputOk") msg = "파일이 정상적으로 등록되었습니다.";
+  	else if(msg == "pdsInputNo") msg = "파일업로드 실패";
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	/* study2/pdstest */
+  	else if(msg == "upLoad1Ok") msg = "파일 업로드 성공!";
+  	else if(msg == "upLoad1No") msg = "파일 업로드 실패...";
 
   	// admin에 있음...
   	alert(msg);
@@ -73,6 +88,7 @@
 	  	위의 코드 두줄(안내메세지+하이퍼링크)은 쌍으로 다녀야 함!!!
 	  	변수에 담으면 여러 메세지 창 띄우기 가능해서 18행부터 다시 작성
   	*/
+  	
   	
   </script>
   

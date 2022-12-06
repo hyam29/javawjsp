@@ -133,12 +133,19 @@
 			if(submitFlag == 1){
 				/* if(nickName != '${sNickName}') */
 				if(nickName == '${sNickName}') {
+					myform.nickDuplication.value = "nickCheck";
 					nickCheckSw = 1;
 				}
 				if(nickCheckSw == 0) {
+					myform.nickDuplication.value = "nickUnCheck";
+					alert("닉네임(별명) 중복체크를 해주세요!")
+				  document.getElementById("nickName").focus();
+					return;				
+				}
+				/* if(nickCheckSw == 0) {
 					alert("닉네임 중복체크버튼을 눌러주세요.");
 					document.getElementById("nickNameBtn").focus();
-				}
+				} */
 				else {
 					// 묶여진 필드(email/tel)를 폼태그안에 hidden태그의 값으로 저장시켜준다.
 	  			myform.email.value = email;
@@ -153,12 +160,12 @@
 			}
 	  }
 	  
-	  // 닉네임 중복체크
+	// 닉네임 중복체크
 	  function nickCheck() {
 		  let nickName = myform.nickName.value;
 		  let url = "${ctp}/nickNameCheck.mem?nickName="+nickName;
 		  
-		  if(nickName == "") {
+		  if(nickName.trim() == "") {
 			  alert("닉네임(별명)을 입력하세요.");
 			  myform.nickName.focus();
 		  }
@@ -167,6 +174,14 @@
 			  nickCheckSw = 1;
 		  }
 	  }
+		// 닉네임 재입력 중복체크 버튼활성화
+	  function reNickCheck() {
+		  let nickCheckBtn = document.myform.nickNameBtn;
+		  myform.nickDuplication.value = "nickUnCheck";
+		  nickNameBtn.disabled = false;
+		  nickNameBtn.style.opacity = 1;
+		  nickNameBtn.style.cursor = "pointer";
+	  }
 	  
   </script>
 </head>
@@ -174,7 +189,7 @@
 <jsp:include page="/include/header.jsp" />
 <p><br/></p>
 <div class="container">
-	<form name="myform" method="post" action="${ctp}/memUpdateOk.mem" class="was-validated">
+	<form name="myform" method="post" action="${ctp}/memUpdateOk.mem" class="was-validated" enctype="multipart/form-data">
     <h2>회원 정보 수정</h2>
     <br/>
     <div class="form-group">
@@ -183,7 +198,7 @@
     <div class="form-group">
       <label for="nickName">닉네임 &nbsp; &nbsp;
     	<input type="button" value="닉네임 중복체크" name="nickNameBtn" id="nickNameBtn" class="btn btn-secondary btn-sm" onclick="nickCheck()"/></label>
-      <input type="text" value="${vo.nickName}" class="form-control" id="nickName" placeholder="별명을 입력하세요." name="nickName" required />
+      <input type="text" value="${vo.nickName}" class="form-control" id="nickName" onkeydown="reNickCheck()" placeholder="별명을 입력하세요." name="nickName" required />
     </div>
     <div class="form-group">
       <label for="name">성명</label>
@@ -357,9 +372,10 @@
     
     <!-- 사진 업로드 X -> noimage.jpg 넘기기 위해 hidden input 생성 -->
     <!-- 주소는 주소부분에 hidden type으로 만들어 뒀음 -->
-    <input type="hidden" name="photo" />
+    <input type="hidden" name="photo" value="${vo.photo}" />
     <input type="hidden" name="tel" />
     <input type="hidden" name="email" />
+    <input type="hidden" name="nickDuplication" value="nickUnCheck" />
   </form>
 </div>
 <p><br/></p>

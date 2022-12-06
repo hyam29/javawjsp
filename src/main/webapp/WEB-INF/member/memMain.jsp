@@ -15,14 +15,22 @@
 <div class="container">
 	<h2>회원 정보 및 설정</h2>
 	<hr/>
-	<p><font color="salmon"><b>${sNickName}</b></font>님 반갑습니다!</p>
-	<p>현재 회원님의 등급은 "<font color="lightsalmon"><b>${strLevel}</b></font>" 입니다.</p>
-	<!-- 아래 4개 DB에서 찾아서 커맨드객체에서 session에 담아서 여기에 뿌려줌 -->
-	<p>회원님의 보유 포인트 : ${point}</p>
-	<p>최종 접속일 : ${lastDate}</p>
-	<p>총 방문횟수 : ${visitCnt}</p>
-	<p>오늘 방문횟수 : ${todayCnt}</p>
+	<div id="memberInfo1" class="mr-5">
+		<p><font color="salmon"><b>${sNickName}</b></font>님 반갑습니다!</p>
+		<p>현재 회원님의 등급은 "<font color="lightsalmon"><b>${strLevel}</b></font>" 입니다.</p>
+		<!-- 아래 4개 DB에서 찾아서 커맨드객체에서 session에 담아서 여기에 뿌려줌 -->
+		<p>회원님의 보유 포인트 : ${point}</p>
+		<p>최종 접속일 : ${lastDate}</p>
+		<p>총 방문횟수 : ${visitCnt}</p>
+		<p>오늘 방문횟수 : ${todayCnt}</p>
+	</div>
 	
+	<div id="memberInfo2">
+    <h3>회원사진</h3>
+	  <p><img src="${ctp}/data/member/${photo}" width="200px" /></p>
+  </div>
+	
+	<hr id="memberInfo3" />
 	<h4>활동 내역</h4>
 	<p>방명록에 올린 글 수 : <span class="viewCheck">${guestCnt}</span></p>
 	<p>게시판에 올린 글 수 : </p>

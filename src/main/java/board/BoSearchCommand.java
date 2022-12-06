@@ -34,10 +34,10 @@ public class BoSearchCommand implements BoardInterface {
 		request.setAttribute("pag", pag);
 		request.setAttribute("pageSize", pageSize);
 		
-		request.setAttribute("searchCount", vos.size());
 		// 사용자에게 검색된 총 건수 알려주기 위해 vos의 크기를 변수에 담아줌
-		request.setAttribute("searchTitle", searchTitle);
+		request.setAttribute("searchCount", vos.size());
 		// vos 담긴 값들을 다시 한글화 작업
+		request.setAttribute("searchTitle", searchTitle);
 		
 		
 		

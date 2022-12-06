@@ -1,6 +1,7 @@
 package board;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -33,6 +34,15 @@ public class BoDeleteOkCommand implements BoardInterface {
 		
 		BoardDAO dao = new BoardDAO();
 		
+		// 현재글의 댓글이 있는지 확인후 삭제처리한다.
+		ArrayList<BoardReplyVO> vos = dao.getBoReply(idx);
+		if(vos.size() != 0) {
+			request.setAttribute("msg", "boReplyDataOk");
+			request.setAttribute("url", request.getContextPath()+"/boContent.bo?idx="+idx+"&pag="+pag+"&pageSize="+pageSize);
+			return;
+		}
+
+		// 현재글의 댓글이 없다면 삭제처리한다.
 		int res = dao.setBoDeleteOk(idx);
 		
 		if(res == 1) {

@@ -55,6 +55,11 @@
 			  document.getElementById("nickName").focus();
 			  return;
 			}
+			else if(myform.nickDuplication.value != "nickCheck") {
+				alert("닉네임(별명) 중복체크를 해주세요!")
+			  document.getElementById("nickName").focus();
+				return;				
+			}
 			if(name.trim() == "") {
 			  alert("성명을 입력해주세요.")
 			  document.getElementById("name").focus();
@@ -196,7 +201,14 @@
 			  window.open(url, "nWin", "width=580px, height=250px");
 		  }
 	  }
-	  
+		// 닉네임 재입력 중복체크 버튼활성화
+	  function reNickCheck() {
+		  let nickNameBtn = document.myform.nickNameBtn;
+		  myform.nickDuplication.value = "nickUnCheck";
+		  nickNameBtn.disabled = false;
+		  nickNameBtn.style.opacity = 1;
+		  nickNameBtn.style.cursor = "pointer";
+	  }
 	  
   </script>
 </head>
@@ -204,7 +216,7 @@
 <jsp:include page="/include/header.jsp" />
 <p><br/></p>
 <div class="container">
-	<form name="myform" method="post" action="${ctp}/memJoinOk.mem" class="was-validated">
+	<form name="myform" method="post" action="${ctp}/memJoinOk.mem" class="was-validated"  enctype="multipart/form-data">
     <h2>회 원 가 입</h2>
     <br/>
     <div class="form-group">
@@ -216,8 +228,8 @@
       <input type="password" class="form-control" id="pwd" placeholder="비밀번호를 입력하세요." name="pwd" required />
     </div>
     <div class="form-group">
-      <label for="nickName">닉네임 &nbsp; &nbsp;<input type="button" value="닉네임 중복체크" class="btn btn-secondary btn-sm" onclick="nickCheck()"/></label>
-      <input type="text" class="form-control" id="nickName" placeholder="별명을 입력하세요." name="nickName" required />
+      <label for="nickName">닉네임 &nbsp; &nbsp;<input type="button" value="닉네임 중복체크" name="nickNameBtn" class="btn btn-secondary btn-sm" onclick="nickCheck()"/></label>
+      <input type="text" class="form-control" id="nickName" placeholder="별명을 입력하세요." name="nickName" onkeydown="reNickCheck()" required />
     </div>
     <div class="form-group">
       <label for="name">성명</label>
@@ -388,6 +400,7 @@
     <input type="hidden" name="tel" />
     <input type="hidden" name="email" />
     <input type="hidden" name="midDuplication" value="midUnCheck" />
+    <input type="hidden" name="nickDuplication" value="nickUnCheck" />
   </form>
 </div>
 <p><br/></p>

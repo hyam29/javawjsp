@@ -35,7 +35,7 @@
 	      </li>
 	      <c:if test="${level != 1}">
 		      <li class="nav-item">
-		        <a class="nav-link" href="#">PDS</a>
+		        <a class="nav-link" href="${ctp}/pdsList.pds">PDS</a>
 		      </li>    
 		      <li class="nav-item dropdown">
 		        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">STUDY</a>
@@ -43,6 +43,10 @@
 				      <a class="dropdown-item" href="${ctp}/pass.st">비밀번호 암호화</a>
 				      <a class="dropdown-item" href="${ctp}/ajax1.st">Ajax연습1</a>
 				      <a class="dropdown-item" href="${ctp}/userList.st">Ajax연습2</a>
+				      <a class="dropdown-item" href="${ctp}/upLoad1.st">싱글파일업로드</a>
+				      <a class="dropdown-item" href="${ctp}/upLoad2.st">멀티파일업로드1</a>
+				      <a class="dropdown-item" href="${ctp}/upLoad3.st">멀티파일업로드2</a>
+				      <a class="dropdown-item" href="${ctp}/upLoad4.st">멀티파일업로드3</a>
 			    	</div>
 		      </li>   
 	      </c:if> 

@@ -17,7 +17,7 @@ public class BoardController extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BoardInterface command = null;
 		
-		String viewPage = "WEB-INF/board";
+		String viewPage = "/WEB-INF/board"; // ?????
 		
 		String uri = request.getRequestURI();
 		String com = uri.substring(uri.lastIndexOf("/"), uri.lastIndexOf("."));

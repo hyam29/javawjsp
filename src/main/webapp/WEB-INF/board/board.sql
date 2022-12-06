@@ -107,3 +107,42 @@ select *, datediff(now(), wDate) as day_diff, timestampdiff(hour, wDate, now()) 
 select * from board where idx < 12 order by idx desc limit 1;
 /* 다음글 체크 */
 select * from board where idx > 7 limit 1;
+
+/* 댓글 수를 전체 List에 출력하기 연습 */
+select * from boardReply order by idx desc;
+
+/* 댓글테이블(boardReply)에서 board테이블의 고유번호 32번글(boardIdx)에 작성된 댓글의 개수? */
+select count(*) from boardReply where boardIdx = 32;
+/* 위의 데이터를 원본글의 고유번호와 함께 출력 (댓글수의 별명은 replyCnt) */
+select boardIdx, count(*) as replyCnt from boardReply where boardIdx = 32;
+/* 위의 데이터에서 원본글을 작성한 닉네임도 함께 출력하시오. 단, 닉네임은 board(원본글)테이블에서 가져와서 출력하시오. (119행은 실무 작성방법) */
+select boardIdx, nickName, count(*) as replyCnt from boardReply where boardIdx = 32;
+SELECT boardIdx, 
+			(SELECT nickName FROM board WHERE idx = 32) AS nickName, /* 자식테이블에서 부모테이블 가져오기 (= subQuery) */
+			COUNT(*) AS replyCnt 
+			FROM boardReply WHERE boardIdx = 32;
+/* 바로 위의 문장을 부모테이블(borad)의 관점에서 보자. */
+SELECT mid, nickName FROM board WHERE idx = 32;
+/* 앞의 닉네임을 자식(댓글)테이블(boardReply)에서 가져와 보여준다면? */
+SELECT mid, 
+			(SELECT nickName FROM boardReply WHERE boardIdx = 32) AS nickName 
+			FROM board WHERE idx = 32; 
+			/* 자식의 boardIdx는 현재 3개이지만, 부모의 관점에서 조건절 idx는 1개 => 따라서, 오류남 */
+
+			
+/* 부모관점(board)에서 고유번호 32번의 아이디, 현재글에 달려있는 댓글의 개수? */
+SELECT mid,
+			(SELECT COUNT(*) FROM boardReply WHERE boardIdx = 32) 
+			FROM board WHERE idx = 32;
+/* 부모관점(board)에서 board테이블의 모든 내용과 현재글에 달려있는 댓글의 개수를 가져오되, 최근글 5개만 출력하시오. */
+SELECT *,
+			(SELECT COUNT(*) FROM boardReply WHERE boardIdx = board.Idx) AS replyCnt
+			FROM board
+			ORDER BY idx DESC
+			limit 5;
+/* (최종) 바로 앞의 데이터에서 각각의 테이블에 별명을 붙여 앞의 내용을 변경시켜 보자. */
+SELECT *,
+			(SELECT COUNT(*) FROM boardReply WHERE boardIdx = b.Idx) AS replyCnt
+			FROM board b
+			ORDER BY idx DESC
+			limit 5;
