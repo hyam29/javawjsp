@@ -53,7 +53,11 @@
 		<c:forEach var="file" items="${files}" varStatus="st">
 			<tr>
 				<td>${st.count}</td>
-				<td><a href="${ctp}/data/pdstest/${file}" download="${file}">${file}</a></td>
+				<td>
+					<a href="${ctp}/data/pdstest/${file}" download="${file}">${file}</a><br/>
+					<!-- java식 다운로드 작성법 -->
+					<a href="${ctp}/javaDown.st?file=${file}">자바 다운로드</a>
+				</td>
 				<!-- download 명령어 : 프론트를 위한 속성으로, 바로 다운로드 가능해지게끔 만들어주는 명령어
 				 but, 파일명이 중복된 경우 서버에는 자동으로 파일명이 변경되어 있음. (atom, atom1)
 				 atom을 받았는데 atom1이 다운받아지므로 이러한 경우는 java로 직접 작성해야함 -->

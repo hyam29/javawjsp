@@ -63,6 +63,8 @@
 		// pds
   	else if(msg == "pdsInputOk") msg = "파일이 정상적으로 등록되었습니다.";
   	else if(msg == "pdsInputNo") msg = "파일업로드 실패";
+  	else if(msg == "pdsDeleteOk") msg = "업로드 파일이 삭제되었습니다.";
+  	else if(msg == "pdsDeleteNo") msg = "비밀번호가 일치하지 않습니다.";
   	
   	
   	

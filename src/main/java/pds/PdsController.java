@@ -51,6 +51,31 @@ public class PdsController extends HttpServlet {
 			command.execute(request, response);
 			return;
 		}
+		else if(com.equals("/pdsContent")) {
+			command = new PdsContentCommand();
+			command.execute(request, response);
+			viewPage += "/pdsContent.jsp";
+		}
+		else if(com.equals("/pdsDownNum")) {
+			command = new PdsDownNumCommand();
+			command.execute(request, response);
+			return;
+		}
+		else if(com.equals("/pdsPwdCheck")) {
+			command = new PdsPwdCheckmCommand();
+			command.execute(request, response);
+			viewPage = "/include/message.jsp";
+		}
+		else if(com.equals("/pdsTotalDown")) {
+			command = new PdsTotalDownCommand();
+			command.execute(request, response);
+			return;
+		}
+		else if(com.equals("/pdsSearch")) {
+			command = new PdsSearchCommand();
+			command.execute(request, response);
+			viewPage += "/pdsSearch.jsp";
+		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);

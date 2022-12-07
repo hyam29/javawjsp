@@ -40,12 +40,14 @@
 	<br/>
 	<table class="table table-hover text-center">
 		<tr class="table-dark text-dark">
-			<th>글번호</th>
-			<th>글제목</th>
-			<th>글쓴이</th>
-			<th>작성일</th>
-			<th>조회수</th>
-			<th>좋아요</th>
+			<th>번호</th>
+			<th>자료제목</th>
+			<th>올린이</th>
+			<th>작성일자</th>
+			<th>분류</th>
+			<th>파일명(크기)</th>
+			<th>다운로드 횟수</th>
+			<th>비고</th>
 		</tr>
 		<c:forEach var="vo" items="${vos}">
 			<tr>

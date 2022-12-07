@@ -19,8 +19,8 @@ public class PdsListCommand implements PdsInterface {
 		
 			// 페이징처리 준비 시작
 			int pag = request.getParameter("pag")==null ? 1 : Integer.parseInt(request.getParameter("pag"));
-			// int pageSize = request.getParameter("pag") == null ? 10 : Integer.parseInt(request.getParameter("pageSize"));
-			int pageSize = 10;
+			int pageSize = request.getParameter("pageSize") == null ? 5 : Integer.parseInt(request.getParameter("pageSize"));
+			// int pageSize = 10;
 			int totRecCnt = dao.totRecCnt(part); // 분류별로 다른 항목을 보여줘야 하므로, part 를 넘겨줘야 함!
 			int totPage = (totRecCnt % pageSize)==0 ? totRecCnt / pageSize : (totRecCnt / pageSize) + 1;
 			int startIndexNo = (pag - 1) * pageSize;

@@ -94,55 +94,15 @@
   		});
   	}
   	
-			// 2.삭제 : modal창을 통해서 비밀번호 확인 후 파일 삭제처리 (ajax)
-		 function pdsDelCheckModalOk() {
-		 	let idx = pwdModalForm.idx.value;
-		 	let fSName = pwdModalForm.fSName.value;
-		 	let pwd = pwdModalForm.pwd.value;
-		 	let query = {
-		 			idx : idx,
-		 			fSName : fSName,
-		 			pwd : pwd
-		 	}
-		 	
-		 	$.ajax({
-		 		type   : "post",
-		 		url    : "${ctp}/pdsDelete.pds",
-		 		data   : query,
-		 		success:function(res) {
-		 			if(res == "1") {
-		 				alert("파일이 삭제되었습니다.");
-		 				location.reload();
-		 			}
-		 			else {
-		 				alert("비밀번호가 일치하지 않습니다.");
-		 			}
-		 		},
-		 		error : function() {
-		 			alert("2.삭제 전송 오류.");
-		 		}
-		 	});
-		 }
-		 
-		// 2.삭제 : modal창을 통해 비밀번호 확인 후 파일 삭제 처리
-		 function pdsDelCheckModal(idx,fSName) {
-		 	$("#myPwdModal").on("show.bs.modal", function(e){
-		 		$(".modal-body #idx").val(idx);
-		 		$(".modal-body #fSName").val(fSName);
-		 	});
-		 }
-		 
-		 // 검색기 처리
-		function pdsSearchCheck() {
-			let searchString = $("#searchString").val();
-  		if(searchString.trim() == "") {
-  			alert("찾고자 하는 검색어를 입력하세요.");
-  			searchForm.searchString.focus();
-  		}
-  		else {
-  			searchForm.submit();
-  		}
-		}
+ 		// 2.삭제 : modal창을 통해 비밀번호 확인 후 파일 삭제 처리
+ 		function pdsDelCheckModal(idx,fSName,part,pag) {
+    	$("#myPwdModal").on("show.bs.modal", function(e){
+    		$(".modal-body #idx").val(idx);
+    		$(".modal-body #fSName").val(fSName);
+    		$(".modal-body #part").val(part);
+    		$(".modal-body #pag").val(pag);
+    	});
+    }
   </script>
 </head>
 <body>
@@ -205,23 +165,20 @@
 					<c:forEach var="fName" items="${fNames}" varStatus="st">
 						<a href="${ctp}/data/pds/${fSNames[st.index]}" download="${fName}" onclick="downNumCheck(${vo.idx})">${fName}</a><br/>
 					</c:forEach>
-					<%-- (<fmt:formatNumber value="${vo.fSize/1024}" pattern="#,###" />KByte) --%>
+					(<fmt:formatNumber value="${vo.fSize/1024}" pattern="#,###" />KByte)
 					<!-- 1000kb 초과시 mb고치기 -->
-					<c:if test="${(vo.fSize/1024) < 1024}">
-						(<fmt:formatNumber value="${vo.fSize/1024}" pattern="#,###" />KB)
-					</c:if>
-					<c:if test="${(vo.fSize/1024) >= 1024}">
-						(<fmt:formatNumber value="${vo.fSize/1024/1024}" pattern="#.0" />MB)
-					</c:if>
+					<%-- <c:set var="fFSize" value="<fmt:formatNumber value="${vo.fSize/1024}" pattern="#,###" />" />
+					<c:if test=""></c:if>
+					(<fmt:formatNumber value="${vo.fSize/1024/1024}" pattern="#,###.0" />MB) --%>
 				</td>
 				<td>${vo.downNum}</td>
 				<td>
-					<a href="#" onclick="modalView('${vo.title}','${vo.nickName}','${vo.mid}','${vo.part}','${vo.fName}','${vo.fSName}','${vo.fSize}','${vo.downNum}','${vo.fDate}')" class="badge badge-pill badge-secondary" data-toggle="modal" data-target="#myModal">모달창</a><br/>
+					<a href="#" onclick="modalView('${vo.title}','${vo.nickName}','${vo.mid}','${vo.part}','${vo.fName}','${vo.fSName}','${vo.fSize}','${vo.downNum}','${vo.fDate}')" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal">모달창</a><br/>
 					<!-- 앵커태그에도 onclick 가능! (현재 위치 알기위해서 앵커태그로 작성하는 것. 원래는 button이 더 많음) -->
-					 <a href="${ctp}/pdsTotalDown.pds?idx=${vo.idx}" class="badge badge-pill badge-primary">전체다운</a><br/>
+					 전체다운로드<br/>
 					 <!-- 1. JSP 함수이용 삭제방법 (값을 넘길 때, 타입이 숫자와 문자를 함께 넘기면 거의 error 따라서, 타입을 문자로 통일해서 보내줘야함) -->
-					 <a href="javascript:pdsDelCheck('${vo.idx}','${vo.fSName}')" class="badge badge-pill badge-warning">1.삭제</a><br/>
-          <a href="#" onclick="pdsDelCheckModal('${vo.idx}','${vo.fSName}')" data-toggle="modal" data-target="#myPwdModal" class="badge badge-pill badge-danger">2.삭제</a>
+					 <a href="javascript:pdsDelCheck('${vo.idx}','${vo.fSName}')" class="btn btn-sm btn-outline-warning mb-1">1.삭제</a><br/>
+					 <a href="#" onclick="pdsDelCheckModal('${vo.idx}','${vo.fSName}','${part}','${pag}')" data-toggle="modal" data-target="#myPwdModal" class="btn btn-sm btn-outline-danger">2.삭제</a>
 			 	</td>
 			</tr>
 		<c:set var="curScrStartNo" value="${curScrStartNo-1}" />
@@ -294,53 +251,40 @@
   </div>
 </div>
 
-<!-- The Modal(폼태그로 비밀번호 처리하기 위한 모달창) -->
+<!-- The Modal(form태그로 비밀번호 처리하기 위한 모달) -->
 <div class="modal fade" id="myPwdModal">
   <div class="modal-dialog">
     <div class="modal-content">
     
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">비밀번호 조회</h4>
+        <h4 class="modal-title">비밀번호 입력 확인</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <!-- & times; : 모달창에서의 x 버튼 -->
       </div>
       
       <!-- Modal body -->
       <div class="modal-body">
-        <form name="pwdModalForm" class="was-validated">
-          비밀번호 :
-          <input type="password" name="pwd" id="pwd" placeholder="자료를 게시할 때 입력한 비밀번호를 입력하세요." class="form-control mb-2" required />
-          <input type="button" value="비밀번호확인후전송" onclick="pdsDelCheckModalOk()" class="btn btn-success form-control"/>
-          <input type="hidden" name="idx" id="idx"/>
-          <input type="hidden" name="fSName" id="fSName"/>
-        </form>
+        <form name="pwdModal" method="post" action="${ctp}/pdsPwdCheck.pds" class="was-validated">
+        	비밀번호
+        	<input type="password" name="pwd" id="pwd" placeholder="자료실 등록시 사용한 비밀번호 입력" class="form-control mb-2" required />
+        	<input type="submit" value="비밀번호 확인" class="btn btn-outline-success form-control" />
+        	
+        	<input type="hidden" name="idx" id="idx" />
+        	<input type="hidden" name="fSName" id="fSName" />
+        	<input type="hidden" name="part" id="part" />
+        	<input type="hidden" name="pag" id="pag" />
+        </form>     
       </div>
       
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
       </div>
       
     </div>
   </div>
 </div>
-
-<!-- 검색기 처리 -->
-<div class="container text-center">
-    <form name="searchForm" method="post" action="${ctp}/pdsSearch.pds">
-        <b>검색: </b>
-        <select name="search">
-          <option value="title">자료제목</option>
-          <option value="nickName">올린이</option>
-        </select>
-        <input type="text" name="searchString" id="searchString" value="${searchString}"/>
-        <input type="button" value="검색" onclick="pdsSearchCheck()" class="btn btn-sm btn-secondary" />
-        <input type="hidden" name="pag" value="${pag}" />
-        <input type="hidden" name="pageSize" value="${pageSize}" />
-        <input type="hidden" name="flag" value="search"/>
-    </form>
-</div>
-<!-- 검색기 처리 -->
 
 <p><br/></p>
 <jsp:include page="/include/footer.jsp" />

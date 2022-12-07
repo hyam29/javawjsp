@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import board.BoardVO;
 import conn.GetConn;
 
 public class PdsDAO {
@@ -176,6 +175,56 @@ public class PdsDAO {
 			getConn.pstmtClose();
 		}
 		return res;
+	}
+
+	// 다운로드 횟수 증가 처리
+	public void setPdsDownNum(int idx) {
+		try {
+			sql = "update pds set downNum = downNum + 1 where idx = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("개별자료 SQL 에러 : " + e.getMessage());
+		} finally {
+			getConn.pstmtClose();
+		}
+	}
+
+	// 자료실 검색기 처리
+	public ArrayList<PdsVO> getPdsContentSearch(String search, String searchString) {
+		ArrayList<PdsVO> vos = new ArrayList<>();
+		try {
+			sql = "select * from pds where "+search+" like ? order by idx desc";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+searchString+"%");
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				vo = new PdsVO();
+				vo.setIdx(rs.getInt("idx"));
+				vo.setMid(rs.getString("mid"));
+				vo.setNickName(rs.getString("nickName"));
+				vo.setfName(rs.getString("fName"));
+				vo.setfSName(rs.getString("fSName"));
+				vo.setfSize(rs.getInt("fSize"));
+				vo.setTitle(rs.getString("title"));
+				vo.setPart(rs.getString("part"));
+				vo.setPwd(rs.getString("pwd"));
+				vo.setfDate(rs.getString("fDate"));
+				vo.setDownNum(rs.getInt("downNum"));
+				vo.setOpenSw(rs.getString("openSw"));
+				vo.setContent(rs.getString("content"));
+				vo.setHostIp(rs.getString("hostIp"));
+				
+				vos.add(vo);
+			}
+		} catch (SQLException e) {
+			System.out.println("검색기 SQL 에러 : " + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return vos;
 	}
 	
 }
