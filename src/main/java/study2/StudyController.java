@@ -39,7 +39,7 @@ public class StudyController extends HttpServlet {
 			viewPage += "/password/pass.jsp";
 		}
 		else if(com.equals("/passOk2")) {
-			command = new PassOk2Command(); 
+			command = new PassOk2Command();
 			command.execute(request, response);
 			viewPage += "/password/passOk2.jsp";
 		}
@@ -107,6 +107,16 @@ public class StudyController extends HttpServlet {
 			command = new FileDeleteCommand();
 			command.execute(request, response);
 			return;
+		}
+		else if(com.equals("/calendar1")) {
+			command = new Calendar1Command();
+			command.execute(request, response);
+			viewPage += "/calendar/calendar1.jsp";
+		}
+		else if(com.equals("/calendar2")) {
+			command = new Calendar2Command();
+			command.execute(request, response);
+			viewPage += "/calendar/calendar2.jsp";
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
