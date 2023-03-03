@@ -19,4 +19,4 @@ ___
 *안녕* 하세요.<br>  <!-- * : 기울임 -->
 **반갑**습니다.<br> <!-- ** : 진하게 -->
 ~~반갑~~습니다.<br> <!-- ~~ : 취소선 -->
-<img src="http://49.142.157.251:9090/green2209J_04/data/exhibition/gc_33.png" width="200px" /><br>
+<img src="http://49.142.157.251:9090/green2209J_04/images/mEnd/img_link04.jpg" width="200px" /><br>
