@@ -45,3 +45,4 @@ ___
 
 ![로고](https://t1.daumcdn.net/cafeattach/1YqmY/0b2ca08f384203c1c695cf67c5f4e157ca4533c5)
 
+![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=anuraghazra&show_icons=true&theme=transparent)
