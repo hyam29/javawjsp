@@ -1,6 +1,4 @@
-#JSP 학습용 GIT
-
-<h2>스프링프레임워크학습</h2>
+<h2>JSP 학습용 GIT</h2>
 <div>
   <a href="http://49.142.157.251:9090/green2209J_04" target="_blank" /> 웹사이트 방문하기 </a>
 </div>
@@ -15,26 +13,4 @@ ___
 
 ![방문해주세요](http://49.142.157.251:9090/green2209J_04/images/mEnd/img_link04.jpg)
 
-## Java란?
-* 객체지향언어
-* 상속/다형성
 
-## Java란?
-1. 객체지향언어
-2. 상속/다형성
-
-<!-- Table -->
-|관계|성명|나이|직업|
-|:--:|:--:|:--:|:--:|
-|아버지|홍장군|61세|공무원|
-|어머니|김말숙|58세|프리랜서|
-|동생|홍리나|25세|학생|
-
-<!-- Code -->
-```java
- System.out.println("안녕");
-```
-
-![로고](https://t1.daumcdn.net/cafeattach/1YqmY/0b2ca08f384203c1c695cf67c5f4e157ca4533c5)
-
-![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=anuraghazra&show_icons=true&theme=transparent)
